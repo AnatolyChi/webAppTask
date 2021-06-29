@@ -1,0 +1,68 @@
+header {
+    padding: 1px 10px;
+    border-radius: 15px;
+    font-family: Cochin, serif;
+    font-size: large;
+}
+
+button {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    background: #e2edf8;
+    border-color: skyblue;
+    margin-bottom: 10px;
+}
+
+.reg {
+    margin-top: 15px;
+    margin-left: 20px;
+    width: 190px;
+    height: 20px;
+    border-radius: 10px;
+    background: #e2edf8;
+    border-color: #66aeee;
+}
+
+.auth {
+    margin-left: 20px;
+    width: 190px;
+    height: 20px;
+    border-radius: 10px;
+    background: #e2edf8;
+    border-color: #66aeee;
+}
+
+.login {
+    margin-left: 23px;
+    width: 130px;
+    height: 25px;
+    border-radius: 7px;
+    margin-top: 7px;
+}
+
+.pass {
+    width: 130px;
+    height: 25px;
+    border-radius: 7px;
+    margin-top: 7px;
+}
+
+.out-user {
+    margin-top: 15px;
+    margin-left: 20px;
+    width: 150px;
+    height: 20px;
+    border-radius: 10px;
+    background: #e2edf8;
+    border-color: #66aeee;
+}
+
+.submit {
+    border-radius: 7px;
+    border: 1px;
+    background: #e2edf8;
+    border-left: 10px;
+}
+
+
