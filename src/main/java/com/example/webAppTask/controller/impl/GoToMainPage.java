@@ -28,12 +28,6 @@ public class GoToMainPage implements Command {
             e.printStackTrace();
         }
 
-        // добавить перенос логики в сервис
-        // продумать как сделать перенаправление в окно для написания новости и
-        // последующего добавления ее в мапу для ее отображения
-
-        // здесь должно быть только отображение списка новостей!
-
         req.setAttribute("newsList", newsList);
         req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
     }
