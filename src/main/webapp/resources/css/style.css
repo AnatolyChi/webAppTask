@@ -48,21 +48,27 @@ button {
     margin-top: 7px;
 }
 
-.out-user {
-    margin-top: 15px;
-    margin-left: 20px;
-    width: 150px;
-    height: 20px;
-    border-radius: 10px;
-    background: #e2edf8;
-    border-color: #66aeee;
-}
-
 .submit {
     border-radius: 7px;
     border: 1px;
     background: #e2edf8;
     border-left: 10px;
+}
+
+textarea {
+    border-color: skyblue;
+    border-radius: 7px;
+}
+
+div.div {
+    float: left;
+    line-height: 20px;
+    font-size: 40px;
+    background: #d7eaf1;
+    margin-top: 20px;
+    width: 320px;
+    margin-right: 20px;
+    text-align: center;
 }
 
 

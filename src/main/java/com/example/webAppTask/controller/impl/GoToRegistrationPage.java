@@ -11,8 +11,7 @@ import java.io.IOException;
 public class GoToRegistrationPage implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = "/WEB-INF/views/registration.jsp";
-        RequestDispatcher rd = request.getRequestDispatcher(path);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/registration.jsp");
         rd.forward(request, response);
     }
 }

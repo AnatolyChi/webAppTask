@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="../../resources/css/style.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
-            h1 {
+            h1, p {
                 font-family: 'Comfortaa', serif;
             }
             body {

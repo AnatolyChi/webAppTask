@@ -11,8 +11,7 @@ import java.io.IOException;
 public class GoToAuthorizationPage implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = "/WEB-INF/views/authorization.jsp";
-        RequestDispatcher rd = request.getRequestDispatcher(path);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/authorization.jsp");
         rd.forward(request, response);
     }
 }

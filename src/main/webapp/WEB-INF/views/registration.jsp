@@ -1,6 +1,7 @@
-<%@ page import="com.example.webAppTask.beans.User" %>
-<%@ page import="com.example.webAppTask.model.Model" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String errorMessage = (String) request.getAttribute("message");
+%>
 <html>
     <head>
         <title>Registration</title>
@@ -23,8 +24,8 @@
         </header>
         <p style="text-align: center">
             <%
-                if (Model.getInstance().isUser((User) request.getAttribute("user")))
-                    out.println("A user with this name already exists!");
+                if (errorMessage != null)
+                    out.println(errorMessage);
             %>
         </p>
         <div style="margin-left: 43%">

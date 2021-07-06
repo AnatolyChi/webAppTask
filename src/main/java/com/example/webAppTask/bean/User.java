@@ -1,4 +1,4 @@
-package com.example.webAppTask.beans;
+package com.example.webAppTask.bean;
 
 import lombok.Data;
 

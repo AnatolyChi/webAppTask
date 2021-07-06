@@ -1,8 +1,7 @@
-<%@ page import="com.example.webAppTask.model.Model" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
 <%
-    List<String> userList = Model.getInstance().sourceUserList();
+    List<String> userList = (List<String>) request.getAttribute("userList");
 %>
 <html>
     <head>
@@ -19,12 +18,19 @@
         <div>
             <ol>
                 <%
-                    for (String users : userList) {
-                        out.println("<li>" + users + "</li>");
+                    if (userList != null) {
+                        for (String users : userList) {
+                            out.println("<li>" + users + "</li>");
+                        }
+                        out.println("Total users: " + userList.size());
+                    } else {
+                        out.print("Users not found!");
                     }
-                    out.println("Total users: " + userList.size());
                 %>
             </ol>
+            <p>
+                <button onclick="location.href='..'">Back to main</button>
+            </p>
         </div>
     </body>
 </html>

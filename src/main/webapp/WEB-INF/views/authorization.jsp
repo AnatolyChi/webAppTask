@@ -1,8 +1,6 @@
-<%@ page import="com.example.webAppTask.beans.User" %>
-<%@ page import="com.example.webAppTask.model.Model" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    User user = (User) request.getAttribute("user");
+    String errorMessage = (String) request.getAttribute("message");
 %>
 <html>
     <head>
@@ -26,8 +24,8 @@
         </header>
         <p style="text-align: center">
             <%
-                if (user != null && !Model.getInstance().isUser(user))
-                    out.println("Enter the correct values!");
+                if (errorMessage != null)
+                    out.println(errorMessage);
             %>
         </p>
         <div style="margin-left: 43%">
