@@ -17,32 +17,37 @@ import java.util.Optional;
 
 @Slf4j
 public class AuthorizationUser implements Command {
-    private static final ServiceProvider provider = ServiceProvider.getInstance();
-    private static final UserService userService = provider.getUserService();
+    private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
+    private static final UserService USER_SERVICE = PROVIDER.getUserService();
+
+    private static final String USER = "user";
+    private static final String AUTH_PARAM = "auth";
+    private static final String MESSAGE_PARAM = "message";
+    private static final String MESSAGE_ERROR = "Enter the correct values!";
+    private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
+    private static final String UNKNOWN_COMMAND = "controller?command=UNKNOWN_COMMAND";
+    private static final String AUTHORIZATION_PAGE = "/WEB-INF/views/authorization.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        RegistrationInfo info = new RegistrationInfo(login, password);
+        RegistrationInfo info = new RegistrationInfo(req);
 
         try {
-            Optional<User> userOptional = userService.authorization(info);
+            Optional<User> userOptional = USER_SERVICE.authorization(info);
 
             if (userOptional.isPresent()) {
                 HttpSession session = req.getSession(true);
-                session.setAttribute("user", userOptional.get());
-                req.setAttribute("greeting", "Welcome " + login);
-                resp.sendRedirect("controller?command=MAIN_PAGE");
+                session.setAttribute(USER, userOptional.get());
+                resp.sendRedirect(MAIN_PAGE_COMMAND);
             } else {
-                req.setAttribute("auth", "auth");
-                req.setAttribute("message", "Enter the correct values!");
-                req.getRequestDispatcher("/WEB-INF/views/authorization.jsp").forward(req, resp);
+                req.setAttribute(AUTH_PARAM, AUTH_PARAM);
+                req.setAttribute(MESSAGE_PARAM, MESSAGE_ERROR);
+                req.getRequestDispatcher(AUTHORIZATION_PAGE).forward(req, resp);
             }
         } catch (ServiceException e) {
             log.error("unknown command", e);
             e.printStackTrace();
-            resp.sendRedirect("controller?command=UNKNOWN_COMMAND");
+            resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }
 }

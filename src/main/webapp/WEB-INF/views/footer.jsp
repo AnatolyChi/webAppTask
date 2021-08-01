@@ -6,8 +6,9 @@
     <body>
         <footer>
             <div>
-                <h1 style="text-align: center">Hello!</h1>
+                <h1 style="text-align: center">Test</h1>
             </div>
+            <!-- Можно добавить ссылки на соц сети -->
         </footer>
     </body>
 </html>

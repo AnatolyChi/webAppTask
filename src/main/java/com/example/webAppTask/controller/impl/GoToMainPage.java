@@ -19,6 +19,9 @@ public class GoToMainPage implements Command {
     private static final ServiceProvider provider = ServiceProvider.getInstance();
     private static final NewsService newsService = provider.getNewsService();
 
+    private static final String NEWS_LIST_PARAM = "newsList";
+    private static final String MAIN_PAGE = "/WEB-INF/views/main.jsp";
+
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<News> newsList = new ArrayList<>();
@@ -29,7 +32,7 @@ public class GoToMainPage implements Command {
             e.printStackTrace();
         }
 
-        req.setAttribute("newsList", newsList);
-        req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+        req.setAttribute(NEWS_LIST_PARAM, newsList);
+        req.getRequestDispatcher(MAIN_PAGE).forward(req, resp);
     }
 }

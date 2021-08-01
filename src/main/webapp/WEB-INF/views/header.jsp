@@ -22,16 +22,17 @@
             <div style="float: left; margin-top: 20px">
                 <form action="/controller" method="POST">
                     <input type="hidden" name="local" value="ru">
-                    <input type="hidden" name="command" value="CHANGE_LOCAL">
+                    <input type="hidden" name="command" value="CHANGE_LOCALE">
                     <input type="submit" value="${ru_button}" >
                 </form>
                 <form action="/controller" method="POST">
                     <input type="hidden" name="local" value="en">
-                    <input type="hidden" name="command" value="CHANGE_LOCAL">
+                    <input type="hidden" name="command" value="CHANGE_LOCALE">
                     <input type="submit" value="${en_button}">
                 </form>
             </div>
             <div style="clear: both">
+                <!-- Работающая, но неправильная проверка, придумать как исправить... -->
                 <c:if test="${requestScope.reg == null and requestScope.auth == null and requestScope.news == null}">
                     <c:choose>
                         <c:when test="${sessionScope.user == null}">

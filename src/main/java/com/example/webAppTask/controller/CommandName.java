@@ -6,7 +6,7 @@ public enum CommandName {
     UNKNOWN_COMMAND,
     AUTHORIZATION,
     REGISTRATION,
-    CHANGE_LOCAL,
+    CHANGE_LOCALE,
     MAIN_PAGE,
     OUT_USER,
     ADD_NEWS,

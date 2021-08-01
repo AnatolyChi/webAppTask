@@ -1,7 +1,7 @@
 package com.example.webAppTask.dao.impl;
 
 import com.example.webAppTask.bean.News;
-import com.example.webAppTask.dao.ConnectionDAO;
+import com.example.webAppTask.dao.ConnectionPool;
 import com.example.webAppTask.dao.exception.DAOException;
 import com.example.webAppTask.dao.NewsDAO;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class NewsDAOImpl implements NewsDAO {
@@ -20,7 +21,7 @@ public class NewsDAOImpl implements NewsDAO {
     public void addNews(String title, String brief) throws DAOException {
         String sql = "INSERT INTO news (title, content) VALUES (?, ?)";
 
-        try (Connection connection = ConnectionDAO.getDataSource().getConnection();
+        try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, title);
             statement.setString(2, brief);
@@ -36,7 +37,7 @@ public class NewsDAOImpl implements NewsDAO {
     public void deleteNews(String title) throws DAOException {
         String sql = "DELETE FROM news WHERE title = ?";
 
-        try (Connection connection = ConnectionDAO.getDataSource().getConnection();
+        try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, title);
             statement.execute();
@@ -52,7 +53,7 @@ public class NewsDAOImpl implements NewsDAO {
         List<News> newsList = new ArrayList<>();
         String sql = "SELECT * FROM news";
 
-        try (Connection connection = ConnectionDAO.getDataSource().getConnection();
+        try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -71,26 +72,8 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public boolean findByTitle(String title) throws DAOException {
-        boolean isContainsTitle = false;
-        String sql = "SELECT title FROM news WHERE title = ?";
-
-        try (Connection connection = ConnectionDAO.getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, title);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    if (resultSet.getString("title").equals(title)) {
-                        isContainsTitle = true;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            log.error("error on the find title", e);
-            e.printStackTrace();
-            throw new DAOException();
-        }
-
-        return isContainsTitle;
+    public Optional<News> get(String title) throws DAOException {
+        return Optional.empty();
+        // Пока так, без реализации
     }
 }

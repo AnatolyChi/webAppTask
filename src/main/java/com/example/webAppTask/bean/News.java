@@ -10,6 +10,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 public final class News implements Serializable {
+
     private String title;
     private String content;
     private String whoWrote;

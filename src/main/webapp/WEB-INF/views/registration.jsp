@@ -44,5 +44,6 @@
                 <button onclick="location.href='..'">${back}</button>
             </p>
         </div>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>

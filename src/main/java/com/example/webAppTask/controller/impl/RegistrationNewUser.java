@@ -22,16 +22,14 @@ public class RegistrationNewUser implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        RegistrationInfo info = new RegistrationInfo(login, password);
+        RegistrationInfo info = new RegistrationInfo(req);
 
         try {
             Optional<User> userOptional = userService.registration(info);
 
             if (!userOptional.isPresent()) {
                 HttpSession session = req.getSession(true);
-                session.setAttribute("user", new User(login, password));
+                session.setAttribute("user", new User(info.getLogin(), info.getPassword()));
                 resp.sendRedirect("controller?command=MAIN_PAGE");
             } else {
                 req.setAttribute("reg", "reg");

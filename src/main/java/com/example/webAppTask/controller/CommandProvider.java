@@ -14,10 +14,10 @@ public class CommandProvider {
         COMMANDS.put(CommandName.UNKNOWN_COMMAND,       new UnknownCommand());
         COMMANDS.put(CommandName.AUTHORIZATION,         new GoToAuthorizationPage());
         COMMANDS.put(CommandName.REGISTRATION,          new GoToRegistrationPage());
-        COMMANDS.put(CommandName.CHANGE_LOCAL,          new ChangeLocal());
+        COMMANDS.put(CommandName.CHANGE_LOCALE,          new ChangeLocale());
         COMMANDS.put(CommandName.MAIN_PAGE,             new GoToMainPage());
         COMMANDS.put(CommandName.OUT_USER,              new OutUser());
-        COMMANDS.put(CommandName.ADD_NEWS,              new AddNews());
+        COMMANDS.put(CommandName.ADD_NEWS,              new GoToAddNews());
         COMMANDS.put(CommandName.NEWS,                  new GoToNewsPage());
     }
 

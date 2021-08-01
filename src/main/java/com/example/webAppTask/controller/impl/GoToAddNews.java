@@ -12,27 +12,27 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
-public class AddNews implements Command {
+public class GoToAddNews implements Command {
     private static final ServiceProvider provider = ServiceProvider.getInstance();
     private static final NewsService newsService = provider.getNewsService();
 
-    private static final String TITLE = "title";
-    private static final String CONTENT = "content";
+    private static final String TITLE_PARAM = "title";
+    private static final String CONTENT_PARAM = "content";
     private static final String INDEX = "/index.jsp";
-    private static final String ADD_NEWS_URL = "/WEB-INF/views/addNews.jsp";
+    private static final String ADD_NEWS_PAGE = "/WEB-INF/views/addNews.jsp";
     private static final String LOG = "news are null";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String title = req.getParameter(TITLE);
-        String content = req.getParameter(CONTENT);
+        String title = req.getParameter(TITLE_PARAM);
+        String content = req.getParameter(CONTENT_PARAM);
 
         try {
             newsService.addNews(title, content);
             req.getRequestDispatcher(INDEX).forward(req, resp);
         } catch (ServiceException e) {
-            log.info(LOG);
-            req.getRequestDispatcher(ADD_NEWS_URL);
+            log.info(LOG, e);
+            req.getRequestDispatcher(ADD_NEWS_PAGE);
         }
     }
 }
