@@ -1,20 +1,22 @@
 package com.example.webAppTask.bean;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
-@Data
-public class News implements Serializable {
+@Getter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+public final class News implements Serializable {
     private String title;
-    private String brief;
+    private String content;
+    private String whoWrote;
+    private Date date;
 
-    public News() {
-
-    }
-
-    public News(String title, String brief) {
+    public News(String title, String content) {
         this.title = title;
-        this.brief = brief;
+        this.content = content;
     }
 }

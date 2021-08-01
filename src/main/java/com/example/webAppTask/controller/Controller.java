@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
     private static final String COMMAND_REQUEST_PARAM = "command";
-    private final CommandProvider provider = new CommandProvider();
+    private final CommandProvider PROVIDER = new CommandProvider();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String commandName = req.getParameter(COMMAND_REQUEST_PARAM);
-        Command command = provider.findCommand(commandName);
+        Command command = PROVIDER.findCommand(commandName);
         command.execute(req, resp);
     }
 }

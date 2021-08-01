@@ -10,6 +10,6 @@ import java.io.IOException;
 public class GoToPersonalPage implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Add logic for Personal page...
+
     }
 }

@@ -4,15 +4,17 @@ import com.example.webAppTask.controller.Command;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class OutUser implements Command {
+public class ChangeLocal implements Command {
+    private static final String LOCAL = "local";
+
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getSession().setAttribute(LOCAL, req.getParameter(LOCAL));
+        resp.sendRedirect(req.getHeader("referer"));
     }
 }

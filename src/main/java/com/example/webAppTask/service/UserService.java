@@ -1,12 +1,12 @@
 package com.example.webAppTask.service;
 
+import com.example.webAppTask.bean.RegistrationInfo;
 import com.example.webAppTask.bean.User;
+import com.example.webAppTask.service.exception.ServiceException;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
-    void registration(User user) throws ServiceException;
-    void authorization(User user) throws ServiceException;
-    List<String> listAllUsers() throws ServiceException;
-    boolean search(User user) throws ServiceException;
+    Optional<User> registration(RegistrationInfo info) throws ServiceException;
+    Optional<User> authorization(RegistrationInfo info) throws ServiceException;
 }

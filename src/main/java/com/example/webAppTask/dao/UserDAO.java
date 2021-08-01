@@ -1,15 +1,13 @@
 package com.example.webAppTask.dao;
 
+import com.example.webAppTask.bean.RegistrationInfo;
 import com.example.webAppTask.bean.User;
+import com.example.webAppTask.dao.exception.DAOException;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface UserDAO {
-    List<String> findAllLogin();
-    List<User> findById();
-    List<User> findByName();
-    void add(User user);
-    void update(User user);
-    void delete(User user);
-    boolean findUser(User user);
+    Optional<User> get(RegistrationInfo info) throws DAOException;
+    void add(RegistrationInfo info) throws DAOException;
+    void update(User user) throws DAOException;
 }

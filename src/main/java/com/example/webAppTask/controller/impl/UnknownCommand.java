@@ -11,7 +11,7 @@ import java.io.IOException;
 public class UnknownCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("errorPage.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/errorPage.jsp");
         rd.forward(req, resp);
     }
 }

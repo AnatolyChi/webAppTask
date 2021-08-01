@@ -1,4 +1,4 @@
-package com.example.webAppTask.dao;
+package com.example.webAppTask.dao.exception;
 
 public class DAOException extends Exception {
 
@@ -12,5 +12,9 @@ public class DAOException extends Exception {
 
     public DAOException(Exception e) {
         super(e);
+    }
+
+    public DAOException(String message, Exception e) {
+        super(message, e);
     }
 }

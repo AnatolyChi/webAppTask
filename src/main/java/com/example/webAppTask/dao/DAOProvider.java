@@ -4,14 +4,14 @@ import com.example.webAppTask.dao.impl.NewsDAOImpl;
 import com.example.webAppTask.dao.impl.UserDAOImpl;
 
 public class DAOProvider {
-    private static final DAOProvider instance = new DAOProvider();
+    private static final DAOProvider INSTANCE = new DAOProvider();
     private final UserDAO userDAO = new UserDAOImpl();
     private final NewsDAO newsDAO = new NewsDAOImpl();
 
     private DAOProvider() { }
 
     public static DAOProvider getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     public UserDAO getUserDAO() {

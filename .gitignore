@@ -7,7 +7,7 @@ target/
 *.jrtc
 *.class
 *.info
-*.properties
+#*.properties
 *.jar
 .DS_Store
 .DS_Store?

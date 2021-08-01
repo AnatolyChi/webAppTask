@@ -1,42 +1,39 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    String errorMessage = (String) request.getAttribute("message");
-%>
+<%--@elvariable id="message" type="java.lang.String"--%>
 <html>
     <head>
         <title>Authorization</title>
-        <link rel="stylesheet" href="../../resources/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
-            h1, p {
-                font-family: 'Comfortaa', serif;
-            }
-            body {
-                background-image: url("../../resources/img/background-image.jpg");
-                background-size: cover;
-            }
             input:invalid { border: 2px solid skyblue; }
         </style>
+        <fmt:setLocale value="${sessionScope.local}"/>
+        <fmt:setBundle basename="localization.local" var="loc"/>
+
+        <fmt:message bundle="${loc}" key="local.authorization" var="authorization"/>
+        <fmt:message bundle="${loc}" key="local.login" var="login"/>
+        <fmt:message bundle="${loc}" key="local.password" var="password"/>
+        <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
     </head>
     <body>
-        <header>
-            <h1 style="text-align: center">Authorization</h1>
-        </header>
-        <p style="text-align: center">
-            <%
-                if (errorMessage != null)
-                    out.println(errorMessage);
-            %>
-        </p>
+        <jsp:include page="header.jsp"/>
+        <h1 style="margin: 0 17%">${authorization}</h1>
         <div style="margin-left: 43%">
+            <p>
+                <c:if test="${message != null}">
+                    ${message}
+                </c:if>
+            </p>
             <form action="/controller" method="POST">
                 <label for="login">
-                    Login:
+                    ${login}:
                     <input id="login" class="login" name="login" required minlength="3">
                 </label>
                 <br>
                 <label for="password">
-                    Password:
+                    ${password}:
                     <input id="password" class="pass" type="password" name="password" required minlength="5">
                 </label>
                 <br>
@@ -44,7 +41,7 @@
                 <input class="submit" type="submit" value="Submit">
             </form>
             <p>
-                <button onclick="location.href='..'">Back to main</button>
+                <button onclick="location.href='..'">${back}</button>
             </p>
         </div>
     </body>

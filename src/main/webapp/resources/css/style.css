@@ -1,8 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+h1, div {
+    font-family: 'Comfortaa', serif;
+}
+
+body {
+    background: url(../img/background-image.jpg) no-repeat fixed;
+    background-size: cover;
+    height: auto;
+}
+
 header {
     padding: 1px 10px;
     border-radius: 15px;
     font-family: Cochin, serif;
     font-size: large;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    left: 0; bottom: 0;
+    background: #bcd8ef;
+    opacity: 0.5;
 }
 
 button {
@@ -12,11 +31,17 @@ button {
     background: #e2edf8;
     border-color: skyblue;
     margin-bottom: 10px;
+    margin-left: 8px;
+}
+
+textarea {
+    border-color: skyblue;
+    border-radius: 5px;
 }
 
 .reg {
-    margin-top: 15px;
     margin-left: 20px;
+    margin-top: 20px;
     width: 190px;
     height: 20px;
     border-radius: 10px;
@@ -34,7 +59,7 @@ button {
 }
 
 .login {
-    margin-left: 23px;
+    margin-left: 30px;
     width: 130px;
     height: 25px;
     border-radius: 7px;
@@ -55,20 +80,14 @@ button {
     border-left: 10px;
 }
 
-textarea {
-    border-color: skyblue;
-    border-radius: 7px;
-}
-
-div.div {
-    float: left;
-    line-height: 20px;
-    font-size: 40px;
-    background: #d7eaf1;
-    margin-top: 20px;
-    width: 320px;
-    margin-right: 20px;
-    text-align: center;
+.divNews {
+    border-radius: 10px;
+    padding: 5px; /* Поля вокруг текста */
+    background: skyblue; /* Цвет фона */
+    margin: 10px auto; /* Выравниваем слой по центру */
+    width: 80%; /* Ширина слоя */
+    opacity: 0.6; /* Значение прозрачности */
+    text-align: center;;
 }
 
 

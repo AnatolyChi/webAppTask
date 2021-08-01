@@ -10,6 +10,7 @@ import java.io.IOException;
 public class GoToNewsPage implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("news", "news");
         req.getRequestDispatcher("/WEB-INF/views/addNews.jsp").forward(req, resp);
     }
 }

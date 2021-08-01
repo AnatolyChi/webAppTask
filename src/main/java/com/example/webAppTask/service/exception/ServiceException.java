@@ -1,6 +1,6 @@
-package com.example.webAppTask.service;
+package com.example.webAppTask.service.exception;
 
-import com.example.webAppTask.dao.DAOException;
+import com.example.webAppTask.dao.exception.DAOException;
 
 public class ServiceException extends Exception {
 
