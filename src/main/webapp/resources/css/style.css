@@ -78,16 +78,31 @@ textarea {
     border: 1px;
     background: #e2edf8;
     border-left: 10px;
+    height: 25px;
+    margin-right: 20px;
 }
 
 .divNews {
     border-radius: 10px;
-    padding: 5px; /* Поля вокруг текста */
-    background: skyblue; /* Цвет фона */
+    padding: 5px;
+    background: skyblue;
     margin: 10px auto; /* Выравниваем слой по центру */
-    width: 80%; /* Ширина слоя */
-    opacity: 0.6; /* Значение прозрачности */
-    text-align: center;;
+    width: 80%;
+    opacity: 0.6;
+    text-align: center;
 }
 
+.per_input {
+    margin: 5px 20px;
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+}
 
+div.field {
+    text-align: right;
+}
+
+label.field {
+    margin-top: 8px;
+}

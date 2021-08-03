@@ -20,6 +20,13 @@ public class RegistrationNewUser implements Command {
     private static final ServiceProvider provider = ServiceProvider.getInstance();
     private static final UserService userService = provider.getUserService();
 
+    private static final String USER_SESSION = "user";
+    private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
+    private static final String MESSAGE_ERROR_PARAM = "message";
+    private static final String REGISTRATION_PAGE = "/WEB-INF/views/registration.jsp";
+    private static final String UNKNOWN_COMMAND = "controller?command=UNKNOWN_COMMAND";
+    private static final String LOG_ERROR = "unknown command";
+
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RegistrationInfo info = new RegistrationInfo(req);
@@ -29,17 +36,16 @@ public class RegistrationNewUser implements Command {
 
             if (!userOptional.isPresent()) {
                 HttpSession session = req.getSession(true);
-                session.setAttribute("user", new User(info.getLogin(), info.getPassword()));
-                resp.sendRedirect("controller?command=MAIN_PAGE");
+                session.setAttribute(USER_SESSION, new User(info.getLogin(), info.getPassword()));
+                resp.sendRedirect(MAIN_PAGE_COMMAND);
             } else {
-                req.setAttribute("reg", "reg");
-                req.setAttribute("message", "A user with this name already exists!");
-                req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
+                req.setAttribute(MESSAGE_ERROR_PARAM, MESSAGE_ERROR_PARAM);
+                req.getRequestDispatcher(REGISTRATION_PAGE).forward(req, resp);
             }
         } catch (ServiceException e) {
-            log.error("unknown command", e);
+            log.error(LOG_ERROR, e);
             e.printStackTrace();
-            resp.sendRedirect("controller?command=UNKNOWN_COMMAND");
+            resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }
 }

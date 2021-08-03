@@ -7,7 +7,7 @@
         <title>Registration</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
         <style>
-            input:invalid { border: 2px solid skyblue; }
+            input:invalid { border: 1px solid #eb8793; }
         </style>
         <fmt:setLocale value="${sessionScope.local}"/>
         <fmt:setBundle basename="localization.local" var="loc"/>
@@ -18,7 +18,7 @@
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="headerForForm.jsp"/>
         <h1 style="margin: 0 17%">${registration}</h1>
         <div style="margin-left: 43%">
             <p>
@@ -29,7 +29,7 @@
             <form action="/controller" method="POST">
                 <label for="login">
                     ${login}:
-                    <input id="login" class="login" type="text" name="login" required minlength="3">
+                    <input id="login" class="login" type="text" name="login" required minlength="3" autofocus>
                 </label>
                 <br>
                 <label for="password">

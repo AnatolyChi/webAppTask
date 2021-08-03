@@ -8,12 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToRegistrationPage implements Command {
-    private static final String REG_PARAM = "reg";
     private static final String REGISTRATION_PAGE = "/WEB-INF/views/registration.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute(REG_PARAM, REG_PARAM);
         request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
     }
 }

@@ -21,4 +21,10 @@ public final class User implements Serializable {
         this.login = login;
         this.password = password;
     }
+
+    public User(String login, String password, Date dateRegistered) {
+        this.login = login;
+        this.password = password;
+        this.dateRegistered = dateRegistered;
+    }
 }

@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 public class NewsDAOImpl implements NewsDAO {
@@ -72,8 +71,7 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public Optional<News> get(String title) throws DAOException {
-        return Optional.empty();
-        // Пока так, без реализации
+    public List<String> titleList(String searchTeg) throws DAOException {
+        return null;
     }
 }

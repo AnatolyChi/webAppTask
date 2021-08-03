@@ -34,5 +34,7 @@ public class GoToAddNews implements Command {
             log.info(LOG, e);
             req.getRequestDispatcher(ADD_NEWS_PAGE);
         }
+
+        // исправить через Optional
     }
 }

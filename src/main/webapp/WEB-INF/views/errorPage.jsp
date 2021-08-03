@@ -11,6 +11,7 @@
         <fmt:message bundle="${loc}" key="local.error.exception" var="error"/>
     </head>
     <body>
+        <jsp:include page="headerForForm.jsp"/>
         <div>
             <h1 style="text-align: center">
                 ${error}

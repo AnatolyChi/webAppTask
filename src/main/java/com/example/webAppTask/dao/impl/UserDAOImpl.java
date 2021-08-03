@@ -14,11 +14,12 @@ import java.util.Optional;
 public class UserDAOImpl implements UserDAO {
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
+    private static final String DATE_REG = "dateRegistered";
     private static final String ERROR_ON_GET = "error on get User";
     private static final String ERROR_ON_ADD = "error on add User";
 
     private static final String GET_USER = "SELECT * FROM users WHERE login = ? AND password = ?";
-    private static final String ADD_USER = "INSERT INTO users (login, password, date_reg) VALUES (?, ?, current_timestamp)";
+    private static final String ADD_USER = "INSERT INTO users (login, password, dateRegistered) VALUES (?, ?, current_timestamp)";
 
     @Override
     public Optional<User> get(RegistrationInfo info) throws DAOException {
@@ -33,7 +34,8 @@ public class UserDAOImpl implements UserDAO {
                 if (resultSet.next()) {
                     optionalUser = Optional.of(new User(
                             resultSet.getString(LOGIN),
-                            resultSet.getString(PASSWORD)));
+                            resultSet.getString(PASSWORD),
+                            resultSet.getDate(DATE_REG)));
                 }
             }
         } catch (SQLException e) {

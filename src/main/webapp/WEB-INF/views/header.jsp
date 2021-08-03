@@ -13,6 +13,8 @@
         <fmt:message bundle="${loc}" key="local.authorization" var="Authorization"/>
         <fmt:message bundle="${loc}" key="local.user.out" var="out_user"/>
         <fmt:message bundle="${loc}" key="local.news.add" var="add_news"/>
+        <fmt:message bundle="${loc}" key="local.personalpage" var="personal_page"/>
+        <fmt:message bundle="${loc}" key="local.greeting" var="greeting"/>
     </head>
     <body>
         <header>
@@ -32,34 +34,35 @@
                 </form>
             </div>
             <div style="clear: both">
-                <!-- Работающая, но неправильная проверка, придумать как исправить... -->
-                <c:if test="${requestScope.reg == null and requestScope.auth == null and requestScope.news == null}">
-                    <c:choose>
-                        <c:when test="${sessionScope.user == null}">
-                            <form action="/controller" method="GET">
-                                <input type="hidden" name="command" value="REGISTRATION">
-                                <input class="reg" type="submit" value="${Registration}">
-                            </form>
-                            <form action="/controller" method="GET">
-                                <input type="hidden" name="command" value="AUTHORIZATION">
-                                <input class="auth" type="submit" value="${Authorization}">
-                            </form>
-                        </c:when>
-                        <c:when test="${sessionScope.user != null}">
-                            <p style="font-weight: bold; margin-left: 20px">
-                                <c:out value="Welcome ${sessionScope.user.login}"/>
-                            </p>
-                            <form action="/controller" method="POST">
-                                <input type="hidden" name="command" value="OUT_USER">
-                                <input class="reg" type="submit" value="${out_user}">
-                            </form>
-                            <form action="/controller" method="POST">
-                                <input type="hidden" name="command" value="NEWS">
-                                <input class="auth" type="submit" value="${add_news}">
-                            </form>
-                        </c:when>
-                    </c:choose>
-                </c:if>
+                <c:choose>
+                    <c:when test="${sessionScope.user == null}">
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="command" value="REGISTRATION">
+                            <input class="reg" type="submit" value="${Registration}">
+                        </form>
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="command" value="AUTHORIZATION">
+                            <input class="auth" type="submit" value="${Authorization}">
+                        </form>
+                    </c:when>
+                    <c:when test="${sessionScope.user != null}">
+                        <p style="font-weight: bold; margin-left: 20px">
+                            <c:out value="${greeting} ${sessionScope.user.login}"/>
+                        </p>
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="command" value="NEWS">
+                            <input class="reg" type="submit" value="${add_news}">
+                        </form>
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="command" value="PERSONAL_PAGE">
+                            <input class="auth" type="submit" value="${personal_page}">
+                        </form>
+                        <form action="/controller" method="POST">
+                            <input type="hidden" name="command" value="OUT_USER">
+                            <input class="auth" type="submit" value="${out_user}">
+                        </form>
+                    </c:when>
+                </c:choose>
             </div>
         </header>
     </body>

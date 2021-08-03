@@ -13,13 +13,13 @@
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
+        <jsp:include page="headerForForm.jsp"/>
         <h1 style="margin: 0 17%">${add_news}</h1>
         <div style="margin-left: 28%">
             <form action="/controller" method="POST">
                 <p><b>${title}</b></p>
                 <p><label>
-                    <textarea name="title" rows="1" cols="90" required></textarea>
+                    <textarea name="title" rows="1" cols="90" required autofocus></textarea>
                 </label></p>
                 <p><b>${info}</b></p>
                 <p><label>

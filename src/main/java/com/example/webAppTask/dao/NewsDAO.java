@@ -10,5 +10,5 @@ public interface NewsDAO {
     void addNews(String title, String brief) throws DAOException;
     void deleteNews(String title) throws DAOException;
     List<News> newsList() throws DAOException;
-    Optional<News> get(String title) throws DAOException;
+    List<String> titleList(String searchTeg) throws DAOException;
 }

@@ -8,12 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToAuthorizationPage implements Command {
-    private static final String AUTH_PARAM = "auth";
     private static final String AUTHORIZATION_PAGE = "/WEB-INF/views/authorization.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute(AUTH_PARAM, AUTH_PARAM);
         request.getRequestDispatcher(AUTHORIZATION_PAGE).forward(request, response);
     }
 }

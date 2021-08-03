@@ -20,4 +20,6 @@ public final class News implements Serializable {
         this.title = title;
         this.content = content;
     }
+
+    // сделать добавление остальных параметров
 }

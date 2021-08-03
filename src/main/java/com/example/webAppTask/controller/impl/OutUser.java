@@ -8,12 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OutUser implements Command {
-    private static final String USER = "user";
-    private static final String INDEX = "/index.jsp";
+    private static final String USER_SESSION = "user";
+    private static final String MAIN_PAGE_COMMAND = "/index.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute(USER);
-        req.getRequestDispatcher(INDEX).forward(req, resp);
+        req.getSession().removeAttribute(USER_SESSION);
+        resp.sendRedirect(MAIN_PAGE_COMMAND);
     }
 }
