@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface NewsDAO {
-    void addNews(String title, String brief) throws DAOException;
-    void deleteNews(String title) throws DAOException;
-    List<News> newsList() throws DAOException;
-    List<String> titleList(String searchTeg) throws DAOException;
+    void add(String title, String content, String username) throws DAOException;
+    void delete(String title) throws DAOException;
+    List<News> readAllLast() throws DAOException;
+    boolean findByTitle(String title) throws DAOException;
 }

@@ -16,10 +16,10 @@ public final class News implements Serializable {
     private String whoWrote;
     private Date date;
 
-    public News(String title, String content) {
+    public News(String title, String content, String whoWrote, Date date) {
         this.title = title;
         this.content = content;
+        this.whoWrote = whoWrote;
+        this.date = date;
     }
-
-    // сделать добавление остальных параметров
 }

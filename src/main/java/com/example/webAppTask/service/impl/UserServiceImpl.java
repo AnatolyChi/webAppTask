@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private static final DAOProvider PROVIDER = DAOProvider.getInstance();
-    private static final UserDAO USER_DAO = PROVIDER.getUserDAO();
+    private static final UserDAO USER_DAO = PROVIDER.getUSER_DAO();
     private static final String ERR_MESSAGE = "Incorrect login or password";
 
     @Override

@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class GoToMainPage implements Command {
     private static final ServiceProvider provider = ServiceProvider.getInstance();
-    private static final NewsService newsService = provider.getNewsService();
+    private static final NewsService newsService = provider.getNEWS_SERVICE();
 
     private static final String NEWS_LIST_PARAM = "newsList";
     private static final String MAIN_PAGE = "/WEB-INF/views/main.jsp";

@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 public class ConnectionPool {
     private static final ComboPooledDataSource CPDS = new ComboPooledDataSource();
 
-    private static final String BASE_NAME = "data/datasource";
+    private static final String BASE_NAME_PATH = "data/datasource";
     private static final String DRIVER = "db.driver";
     private static final String URL = "db.url";
     private static final String USER_NAME = "db.userName";
@@ -23,7 +23,7 @@ public class ConnectionPool {
     }
 
     static {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(BASE_NAME);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(BASE_NAME_PATH);
         try {
             CPDS.setDriverClass(resourceBundle.getString(DRIVER));
             CPDS.setJdbcUrl(resourceBundle.getString(URL));

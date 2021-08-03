@@ -7,7 +7,7 @@
         <title>Authorization</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
         <style>
-            input:invalid { border: 1px solid #eb8793; }
+            input:invalid { border: 2px solid #eb8793; }
         </style>
         <fmt:setLocale value="${sessionScope.local}"/>
         <fmt:setBundle basename="localization.local" var="loc"/>
@@ -16,6 +16,7 @@
         <fmt:message bundle="${loc}" key="local.login" var="login"/>
         <fmt:message bundle="${loc}" key="local.password" var="password"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
+        <fmt:message bundle="${loc}" key="local.valid.authorization" var="are_not_valid"/>
     </head>
     <body>
         <jsp:include page="headerForForm.jsp"/>
@@ -23,7 +24,7 @@
         <div style="margin-left: 43%">
             <p>
                 <c:if test="${message != null}">
-                    ${message}
+                    ${are_not_valid}
                 </c:if>
             </p>
             <form action="/controller" method="POST">
@@ -44,5 +45,6 @@
                 <button onclick="location.href='..'">${back}</button>
             </p>
         </div>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>

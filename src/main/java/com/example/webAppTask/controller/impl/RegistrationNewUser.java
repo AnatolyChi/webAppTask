@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class RegistrationNewUser implements Command {
     private static final ServiceProvider provider = ServiceProvider.getInstance();
-    private static final UserService userService = provider.getUserService();
+    private static final UserService userService = provider.getUSER_SERVICE();
 
     private static final String USER_SESSION = "user";
     private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";

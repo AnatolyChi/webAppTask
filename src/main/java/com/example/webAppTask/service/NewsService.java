@@ -6,7 +6,7 @@ import com.example.webAppTask.service.exception.ServiceException;
 import java.util.List;
 
 public interface NewsService {
-    void addNews(String title, String brief) throws ServiceException;
+    boolean addNews(String title, String content, String username) throws ServiceException;
     void deleteNews(String title) throws ServiceException;
     List<News> newsList() throws ServiceException;
 }

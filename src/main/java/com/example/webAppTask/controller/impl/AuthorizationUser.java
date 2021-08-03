@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 public class AuthorizationUser implements Command {
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final UserService USER_SERVICE = PROVIDER.getUserService();
+    private static final UserService USER_SERVICE = PROVIDER.getUSER_SERVICE();
 
     private static final String USER_SESSION = "user";
     private static final String MESSAGE_ERROR_PARAM = "message";

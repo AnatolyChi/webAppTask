@@ -16,53 +16,70 @@ import java.util.List;
 @Slf4j
 public class NewsDAOImpl implements NewsDAO {
 
-    @Override
-    public void addNews(String title, String brief) throws DAOException {
-        String sql = "INSERT INTO news (title, content) VALUES (?, ?)";
+    private static final String QUERY_FOR_ADD = "INSERT INTO news (title, content, whoWrote, date) VALUES (?, ?, ?, current_timestamp)";
+    private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM news ORDER BY id DESC LIMIT 5";
+    private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT title FROM news WHERE title = ?";
+    private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
 
+    private static final String LOG_ON_ADD = "error on add News";
+    private static final String LOG_ON_DELETE = "error on delete by title";
+    private static final String LOG_ON_READ_ALL_LAST = "error on read news";
+    private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
+    private static final String TITLE_PARAM = "title";
+    private static final String CONTENT_PARAM = "content";
+    private static final String WHO_WROTE_PARAM = "whoWrote";
+    private static final String DATE_PARAM = "date";
+
+    @Override
+    public void add(String title, String content, String username) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
+
             statement.setString(1, title);
-            statement.setString(2, brief);
+            statement.setString(2, content);
+            statement.setString(3, username);
             statement.execute();
         } catch (SQLException e) {
-            log.error("error on add News", e);
+            log.error(LOG_ON_ADD, e);
             e.printStackTrace();
             throw new DAOException();
         }
     }
 
     @Override
-    public void deleteNews(String title) throws DAOException {
-        String sql = "DELETE FROM news WHERE title = ?";
-
+    // До конца не реализован, т.к. ещё не используется
+    public void delete(String title) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
+
             statement.setString(1, title);
-            statement.execute();
+            statement.executeUpdate();
         } catch (SQLException e) {
-            log.error("error on deleting title", e);
+            log.error(LOG_ON_DELETE, e);
             e.printStackTrace();
             throw new DAOException();
         }
     }
 
     @Override
-    public List<News> newsList() throws DAOException {
+    public List<News> readAllLast() throws DAOException {
         List<News> newsList = new ArrayList<>();
-        String sql = "SELECT * FROM news";
 
         try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_READ_ALL_LAST)) {
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     newsList.add(new News(
-                            resultSet.getString("title"),
-                            resultSet.getString("content")
+                            resultSet.getString(TITLE_PARAM),
+                            resultSet.getString(CONTENT_PARAM),
+                            resultSet.getString(WHO_WROTE_PARAM),
+                            resultSet.getDate(DATE_PARAM)
                     ));
                 }
             }
         } catch (SQLException e) {
+            log.error(LOG_ON_READ_ALL_LAST, e);
             e.printStackTrace();
             throw new DAOException();
         }
@@ -71,7 +88,25 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public List<String> titleList(String searchTeg) throws DAOException {
-        return null;
+    public boolean findByTitle(String title) throws DAOException {
+        boolean searchResult = false;
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_BY_TITLE)) {
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next() ) {
+                    if (resultSet.getString("title").equals(title)) {
+                        searchResult = true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            log.error(LOG_ON_FIND_BY_TITLE, e);
+            e.printStackTrace();
+            throw new DAOException();
+        }
+
+        return searchResult;
     }
 }

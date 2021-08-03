@@ -12,8 +12,11 @@ import java.sql.Date;
 public final class User implements Serializable {
     private String login;
     private String password;
+    @Setter
     private String firstName;
+    @Setter
     private String lastName;
+    @Setter
     private String email;
     private Date dateRegistered;
 
