@@ -34,16 +34,4 @@ public final class User implements Serializable {
         this.lastName = lastName;
         this.email = email;
     }
-
-    // разобраться с connection pool
-    // нужно ли закрывать потоки для возврата в пул
-    // или try with resources справляется с этим
-
-    // нужно ли поле даты регистрации?
-    // или создавать юзера в дао занося в конструктор дату
-
-    // пересмотреть весь проект на наличие ошибок
-
-    // переименовать папку views!!
-    // (или нет :/ )
 }
