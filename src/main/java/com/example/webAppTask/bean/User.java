@@ -11,7 +11,6 @@ import java.sql.Date;
 @NoArgsConstructor
 public final class User implements Serializable {
     private String login;
-    private String password;
     @Setter
     private String firstName;
     @Setter
@@ -20,14 +19,31 @@ public final class User implements Serializable {
     private String email;
     private Date dateRegistered;
 
-    public User(String login, String password) {
+    public User(String login) {
         this.login = login;
-        this.password = password;
     }
 
-    public User(String login, String password, Date dateRegistered) {
+    public User(String login, Date dateRegistered) {
         this.login = login;
-        this.password = password;
         this.dateRegistered = dateRegistered;
     }
+
+    public User(String login, String firstName, String lastName, String email) {
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    // разобраться с connection pool
+    // нужно ли закрывать потоки для возврата в пул
+    // или try with resources справляется с этим
+
+    // нужно ли поле даты регистрации?
+    // или создавать юзера в дао занося в конструктор дату
+
+    // пересмотреть весь проект на наличие ошибок
+
+    // переименовать папку views!!
+    // (или нет :/ )
 }

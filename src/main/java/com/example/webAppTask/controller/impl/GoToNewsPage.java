@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToNewsPage implements Command {
-    private static final String ADD_NEWS_PAGE = "/WEB-INF/views/addNews.jsp";
+    private static final String ADD_NEWS_PAGE = "/WEB-INF/view/addNews.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

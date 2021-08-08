@@ -17,7 +17,7 @@ public class AddNews implements Command {
     private static final NewsService NEWS_SERVICE = PROVIDER.getNEWS_SERVICE();
 
     private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
-    private static final String ADD_NEWS_PAGE = "/WEB-INF/views/addNews.jsp";
+    private static final String ADD_NEWS_PAGE = "/WEB-INF/view/addNews.jsp";
     private static final String USER_LOGIN_PARAM = "username";
     private static final String CONTENT_PARAM = "content";
     private static final String TITLE_PARAM = "title";

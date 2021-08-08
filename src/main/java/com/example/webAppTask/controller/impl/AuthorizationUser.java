@@ -24,7 +24,7 @@ public class AuthorizationUser implements Command {
     private static final String MESSAGE_ERROR_PARAM = "message";
     private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
     private static final String UNKNOWN_COMMAND = "controller?command=UNKNOWN_COMMAND";
-    private static final String AUTHORIZATION_PAGE = "/WEB-INF/views/authorization.jsp";
+    private static final String AUTHORIZATION_PAGE = "/WEB-INF/view/authorization.jsp";
     private static final String LOG_ERROR = "unknown command";
 
     @Override

@@ -20,7 +20,7 @@ public class GoToMainPage implements Command {
     private static final NewsService newsService = provider.getNEWS_SERVICE();
 
     private static final String NEWS_LIST_PARAM = "newsList";
-    private static final String MAIN_PAGE = "/WEB-INF/views/main.jsp";
+    private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

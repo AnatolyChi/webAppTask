@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToRegistrationPage implements Command {
-    private static final String REGISTRATION_PAGE = "/WEB-INF/views/registration.jsp";
+    private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

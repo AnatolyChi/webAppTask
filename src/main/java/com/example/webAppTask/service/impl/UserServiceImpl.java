@@ -50,6 +50,20 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public void personalUpdate(User user, String firstName, String lastName, String email) throws ServiceException {
+        if ((firstName != null && !firstName.equals(user.getFirstName())) ||
+                (lastName != null && !lastName.equals(user.getLastName())) ||
+                (email != null && !email.equals(user.getEmail()))) {
+            try {
+                USER_DAO.update(user, firstName, lastName, email);
+            } catch (DAOException e) {
+                e.printStackTrace();
+                throw new ServiceException(e);
+            }
+        }
+    }
+
     private void validate(RegistrationInfo info) throws ServiceException {
         if (info.getLogin() == null ||
             info.getLogin().isEmpty() ||

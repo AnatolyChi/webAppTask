@@ -25,8 +25,8 @@ footer {
 }
 
 button {
-    width: 200px;
-    height: 30px;
+    width: 170px;
+    height: 25px;
     border-radius: 10px;
     background: #e2edf8;
     border-color: skyblue;
@@ -79,6 +79,7 @@ textarea {
     background: #e2edf8;
     border-left: 10px;
     height: 25px;
+    width: 60px;
     margin-right: 20px;
 }
 
@@ -86,7 +87,7 @@ textarea {
     border-radius: 10px;
     padding: 5px;
     background: skyblue;
-    margin: 10px auto; /* Выравниваем слой по центру */
+    margin: 10px auto; /* Выравнивание слой по центру */
     width: 80%;
     opacity: 0.6;
     text-align: center;
@@ -105,4 +106,8 @@ div.field {
 
 label.field {
     margin-top: 8px;
+}
+
+span {
+    text-align: right;
 }

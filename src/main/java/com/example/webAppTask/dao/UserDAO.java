@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface UserDAO {
     Optional<User> get(RegistrationInfo info) throws DAOException;
     void add(RegistrationInfo info) throws DAOException;
-    void update(User user) throws DAOException;
+    void update(User user, String firstName, String lastName, String email) throws DAOException;
 }

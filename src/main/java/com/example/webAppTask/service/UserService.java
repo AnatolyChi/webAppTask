@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface UserService {
     Optional<User> registration(RegistrationInfo info) throws ServiceException;
     Optional<User> authorization(RegistrationInfo info) throws ServiceException;
+    void personalUpdate(User user, String firstName, String lastName, String email) throws ServiceException;
 }

@@ -1,12 +1,14 @@
 package com.example.webAppTask.dao;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import lombok.extern.slf4j.Slf4j;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class ConnectionPool {
     private static final ComboPooledDataSource CPDS = new ComboPooledDataSource();
 
@@ -15,6 +17,7 @@ public class ConnectionPool {
     private static final String URL = "db.url";
     private static final String USER_NAME = "db.userName";
     private static final String PASSWORD = "db.password";
+    private static final String LOG_PROPERTY_VETO_EX = "property error";
 
     public ConnectionPool() { }
 
@@ -35,6 +38,7 @@ public class ConnectionPool {
             CPDS.setAcquireIncrement(5);
             CPDS.setMaxPoolSize(5);
         } catch (PropertyVetoException e) {
+            log.error(LOG_PROPERTY_VETO_EX, e);
             e.printStackTrace();
         }
     }

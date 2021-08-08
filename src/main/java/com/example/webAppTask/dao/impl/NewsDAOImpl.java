@@ -17,8 +17,8 @@ import java.util.List;
 public class NewsDAOImpl implements NewsDAO {
 
     private static final String QUERY_FOR_ADD = "INSERT INTO news (title, content, whoWrote, date) VALUES (?, ?, ?, current_timestamp)";
-    private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM news ORDER BY id DESC LIMIT 5";
-    private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT title FROM news WHERE title = ?";
+    private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM news ORDER BY id DESC LIMIT 10";
+    private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
 
     private static final String LOG_ON_ADD = "error on add News";
@@ -94,9 +94,10 @@ public class NewsDAOImpl implements NewsDAO {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_BY_TITLE)) {
 
+            statement.setString(1, title);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next() ) {
-                    if (resultSet.getString("title").equals(title)) {
+                    if (title.equals(resultSet.getString(TITLE_PARAM))) {
                         searchResult = true;
                     }
                 }

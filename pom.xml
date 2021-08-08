@@ -18,6 +18,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- SERVLET -->
+        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>5.0.0</version>
@@ -29,24 +37,13 @@
             <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
-            <scope>compile</scope>
-        </dependency>
+
+        <!-- DB -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.25</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version>
-        </dependency>
-
-        <!-- DB -->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
@@ -73,6 +70,25 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>apache-jstl</artifactId>
             <version>11.0.0</version>
+        </dependency>
+
+        <!-- HASH -->
+        <dependency>
+            <groupId>com.amdelamar</groupId>
+            <artifactId>jhash</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <!-- LOG -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.32</version>
         </dependency>
     </dependencies>
 

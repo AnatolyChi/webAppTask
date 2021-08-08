@@ -13,8 +13,9 @@ public class CommandProvider {
         COMMANDS.put(CommandName.AUTHORIZATION_USER,    new AuthorizationUser());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND,       new UnknownCommand());
         COMMANDS.put(CommandName.AUTHORIZATION,         new GoToAuthorizationPage());
-        COMMANDS.put(CommandName.CHANGE_LOCALE,         new ChangeLocale());
         COMMANDS.put(CommandName.PERSONAL_PAGE,         new GoToPersonalPage());
+        COMMANDS.put(CommandName.CHANGE_LOCALE,         new ChangeLocale());
+        COMMANDS.put(CommandName.UPDATE_USER,           new UpdateUser());
         COMMANDS.put(CommandName.REGISTRATION,          new GoToRegistrationPage());
         COMMANDS.put(CommandName.MAIN_PAGE,             new GoToMainPage());
         COMMANDS.put(CommandName.OUT_USER,              new OutUser());
