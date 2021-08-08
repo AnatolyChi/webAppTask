@@ -19,7 +19,7 @@ public class ConnectionPool {
     private static final String PASSWORD = "db.password";
     private static final String LOG_PROPERTY_VETO_EX = "property error";
 
-    public ConnectionPool() { }
+    private ConnectionPool() { }
 
     public static Connection getConnection() throws SQLException {
         return CPDS.getConnection();
