@@ -32,13 +32,14 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public void add(String title, String content, String username) throws DAOException {
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
+        try (Connection connection = ConnectionPool.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
 
-            statement.setString(1, title);
-            statement.setString(2, content);
-            statement.setString(3, username);
-            statement.execute();
+                statement.setString(1, title);
+                statement.setString(2, content);
+                statement.setString(3, username);
+                statement.execute();
+            }
         } catch (SQLException e) {
             log.error(LOG_ON_ADD, e);
             e.printStackTrace();
@@ -49,11 +50,12 @@ public class NewsDAOImpl implements NewsDAO {
     @Override
     // До конца не реализован, т.к. ещё не используется
     public void delete(String title) throws DAOException {
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
+        try (Connection connection = ConnectionPool.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
 
-            statement.setString(1, title);
-            statement.executeUpdate();
+                statement.setString(1, title);
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             log.error(LOG_ON_DELETE, e);
             e.printStackTrace();
@@ -65,17 +67,17 @@ public class NewsDAOImpl implements NewsDAO {
     public List<News> readAllLast() throws DAOException {
         List<News> newsList = new ArrayList<>();
 
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_READ_ALL_LAST)) {
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    newsList.add(new News(
-                            resultSet.getString(TITLE_PARAM),
-                            resultSet.getString(CONTENT_PARAM),
-                            resultSet.getString(WHO_WROTE_PARAM),
-                            resultSet.getDate(DATE_PARAM)
-                    ));
+        try (Connection connection = ConnectionPool.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_READ_ALL_LAST)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        newsList.add(new News(
+                                resultSet.getString(TITLE_PARAM),
+                                resultSet.getString(CONTENT_PARAM),
+                                resultSet.getString(WHO_WROTE_PARAM),
+                                resultSet.getDate(DATE_PARAM)
+                        ));
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -91,14 +93,14 @@ public class NewsDAOImpl implements NewsDAO {
     public boolean findByTitle(String title) throws DAOException {
         boolean searchResult = false;
 
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_BY_TITLE)) {
-
-            statement.setString(1, title);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next() ) {
-                    if (title.equals(resultSet.getString(TITLE_PARAM))) {
-                        searchResult = true;
+        try (Connection connection = ConnectionPool.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_BY_TITLE)) {
+                statement.setString(1, title);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next() ) {
+                        if (title.equals(resultSet.getString(TITLE_PARAM))) {
+                            searchResult = true;
+                        }
                     }
                 }
             }
