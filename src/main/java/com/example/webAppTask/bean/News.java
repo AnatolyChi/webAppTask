@@ -13,13 +13,13 @@ public final class News implements Serializable {
 
     private String title;
     private String content;
-    private String whoWrote;
+    private String author;
     private Date date;
 
-    public News(String title, String content, String whoWrote, Date date) {
+    public News(String title, String content, String author, Date date) {
         this.title = title;
         this.content = content;
-        this.whoWrote = whoWrote;
+        this.author = author;
         this.date = date;
     }
 }

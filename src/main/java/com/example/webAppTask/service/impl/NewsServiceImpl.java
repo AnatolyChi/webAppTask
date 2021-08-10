@@ -21,13 +21,13 @@ public class NewsServiceImpl implements NewsService {
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
 
     @Override
-    public boolean addNews(String title, String content, String username) throws ServiceException {
-        validate(title, content, username);
+    public boolean addNews(String title, String content, String author) throws ServiceException {
+        validate(title, content, author);
         boolean statusAdded = false;
 
         try {
             if (!NEWS_DAO.findByTitle(title)) {
-                NEWS_DAO.add(title, content, username);
+                NEWS_DAO.add(title, content, author);
                 statusAdded = true;
             }
         } catch (DAOException e) {

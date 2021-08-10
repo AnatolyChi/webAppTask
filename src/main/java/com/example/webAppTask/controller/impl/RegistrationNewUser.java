@@ -36,7 +36,7 @@ public class RegistrationNewUser implements Command {
 
             if (!userOptional.isPresent()) {
                 HttpSession session = req.getSession(true);
-                session.setAttribute(USER_SESSION, new User(info.getLogin()));
+                session.setAttribute(USER_SESSION, new User(info.getLogin(), info.getDate()));
                 resp.sendRedirect(MAIN_PAGE_COMMAND);
             } else {
                 req.setAttribute(MESSAGE_ERROR_PARAM, MESSAGE_ERROR_PARAM);

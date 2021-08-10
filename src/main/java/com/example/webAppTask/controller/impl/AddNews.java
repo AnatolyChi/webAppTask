@@ -17,8 +17,8 @@ public class AddNews implements Command {
     private static final NewsService NEWS_SERVICE = PROVIDER.getNEWS_SERVICE();
 
     private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
-    private static final String ADD_NEWS_PAGE = "/WEB-INF/view/addNews.jsp";
-    private static final String USER_LOGIN_PARAM = "username";
+    private static final String NEWS_PAGE = "controller?command=NEWS";
+    private static final String USER_LOGIN_PARAM = "author";
     private static final String CONTENT_PARAM = "content";
     private static final String TITLE_PARAM = "title";
     private static final String LOG_ERROR = "news are null";
@@ -27,13 +27,13 @@ public class AddNews implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter(TITLE_PARAM);
         String content = req.getParameter(CONTENT_PARAM);
-        String userLogin = req.getParameter(USER_LOGIN_PARAM);
+        String author = req.getParameter(USER_LOGIN_PARAM);
 
         try {
-            if (NEWS_SERVICE.addNews(title, content, userLogin)) {
+            if (NEWS_SERVICE.addNews(title, content, author)) {
                 resp.sendRedirect(MAIN_PAGE_COMMAND);
             } else {
-                req.getRequestDispatcher(ADD_NEWS_PAGE);
+                resp.sendRedirect(NEWS_PAGE);
             }
         } catch (ServiceException e) {
             log.error(LOG_ERROR, e);

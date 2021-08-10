@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @ToString
@@ -16,6 +17,8 @@ public final class RegistrationInfo implements Serializable {
 
     private String login;
     private String password;
+    @Setter
+    private Date date;
 
     public RegistrationInfo(HttpServletRequest request) {
         this.login = request.getParameter(LOGIN);

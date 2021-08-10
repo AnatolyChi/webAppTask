@@ -25,7 +25,7 @@
                 <p><label>
                     <textarea name="content" rows="30" cols="90" required></textarea>
                 </label></p>
-                <input type="hidden" name="username" value="${sessionScope.user.login}">
+                <input type="hidden" name="author" value="${sessionScope.user.login}">
                 <input type="hidden" name="command" value="ADD_NEWS">
                 <input class="submit" type="submit" value="Submit">
             </form>
