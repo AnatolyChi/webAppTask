@@ -56,12 +56,12 @@
                             <input class="submit" type="submit" value="Submit">
                         </div>
                     </form>
+                    <p style="clear: both; margin-left: 240px">
+                        <button onclick="location.href='..'">${back}</button>
+                    </p>
                 </div>
             </c:when>
         </c:choose>
-        <p style="clear: both; margin-left: 240px">
-            <button onclick="location.href='..'">${back}</button>
-        </p>
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
