@@ -1,11 +1,11 @@
-package com.example.webapptask.service.impl;
+package com.example.webAppTask.service.impl;
 
-import com.example.webapptask.bean.News;
-import com.example.webapptask.dao.exception.DAOException;
-import com.example.webapptask.dao.DAOProvider;
-import com.example.webapptask.dao.NewsDAO;
-import com.example.webapptask.service.NewsService;
-import com.example.webapptask.service.exception.ServiceException;
+import com.example.webAppTask.bean.News;
+import com.example.webAppTask.dao.exception.DAOException;
+import com.example.webAppTask.dao.DAOProvider;
+import com.example.webAppTask.dao.NewsDAO;
+import com.example.webAppTask.service.NewsService;
+import com.example.webAppTask.service.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -21,13 +21,13 @@ public class NewsServiceImpl implements NewsService {
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
 
     @Override
-    public boolean addNews(String title, String content, String author) throws ServiceException {
-        validate(title, content, author);
+    public boolean addNews(String title, String content) throws ServiceException {
+        validate(title, content);
         boolean statusAdded = false;
 
         try {
             if (!NEWS_DAO.findByTitle(title)) {
-                NEWS_DAO.add(title, content, author);
+                NEWS_DAO.add(title, content);
                 statusAdded = true;
             }
         } catch (DAOException e) {

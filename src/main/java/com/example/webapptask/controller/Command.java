@@ -1,4 +1,4 @@
-package com.example.webapptask.controller;
+package com.example.webAppTask.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

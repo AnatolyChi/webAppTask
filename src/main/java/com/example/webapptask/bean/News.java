@@ -1,4 +1,4 @@
-package com.example.webapptask.bean;
+package com.example.webAppTask.bean;
 
 import lombok.*;
 
@@ -13,13 +13,11 @@ public final class News implements Serializable {
 
     private String title;
     private String content;
-    private String author;
     private Date date;
 
-    public News(String title, String content, String author, Date date) {
+    public News(String title, String content, Date date) {
         this.title = title;
         this.content = content;
-        this.author = author;
         this.date = date;
     }
 }

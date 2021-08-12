@@ -1,12 +1,12 @@
-package com.example.webapptask.dao.impl;
+package com.example.webAppTask.dao.impl;
 
 import com.amdelamar.jhash.Hash;
 import com.amdelamar.jhash.exception.InvalidHashException;
-import com.example.webapptask.bean.RegistrationInfo;
-import com.example.webapptask.bean.User;
-import com.example.webapptask.dao.ConnectionPool;
-import com.example.webapptask.dao.exception.DAOException;
-import com.example.webapptask.dao.UserDAO;
+import com.example.webAppTask.bean.RegistrationInfo;
+import com.example.webAppTask.bean.User;
+import com.example.webAppTask.dao.ConnectionPool;
+import com.example.webAppTask.dao.exception.DAOException;
+import com.example.webAppTask.dao.UserDAO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
@@ -75,7 +75,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(User user, String firstName, String lastName, String email) throws DAOException {
+    public void update(User user, String firstName, String lastName, String email, String age) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_UPDATE)) {
                 statement.setString(1, firstName);
@@ -87,6 +87,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 user.setEmail(email);
+                user.setAge(age);
             }
         } catch (SQLException e) {
             log.error(ERROR_ON_UPDATE);

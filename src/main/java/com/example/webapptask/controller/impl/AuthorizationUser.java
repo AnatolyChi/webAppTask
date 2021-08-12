@@ -1,11 +1,11 @@
-package com.example.webapptask.controller.impl;
+package com.example.webAppTask.controller.impl;
 
-import com.example.webapptask.bean.RegistrationInfo;
-import com.example.webapptask.bean.User;
-import com.example.webapptask.controller.Command;
-import com.example.webapptask.service.exception.ServiceException;
-import com.example.webapptask.service.ServiceProvider;
-import com.example.webapptask.service.UserService;
+import com.example.webAppTask.bean.RegistrationInfo;
+import com.example.webAppTask.bean.User;
+import com.example.webAppTask.controller.Command;
+import com.example.webAppTask.service.exception.ServiceException;
+import com.example.webAppTask.service.ServiceProvider;
+import com.example.webAppTask.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,7 +44,6 @@ public class AuthorizationUser implements Command {
             }
         } catch (ServiceException e) {
             log.error(LOG_ERROR, e);
-            e.printStackTrace();
             resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }

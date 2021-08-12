@@ -1,9 +1,9 @@
-package com.example.webapptask.dao.impl;
+package com.example.webAppTask.dao.impl;
 
-import com.example.webapptask.bean.News;
-import com.example.webapptask.dao.ConnectionPool;
-import com.example.webapptask.dao.exception.DAOException;
-import com.example.webapptask.dao.NewsDAO;
+import com.example.webAppTask.bean.News;
+import com.example.webAppTask.dao.ConnectionPool;
+import com.example.webAppTask.dao.exception.DAOException;
+import com.example.webAppTask.dao.NewsDAO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
@@ -16,8 +16,9 @@ import java.util.List;
 @Slf4j
 public class NewsDAOImpl implements NewsDAO {
 
-    private static final String QUERY_FOR_ADD = "INSERT INTO news (title, content, author, date) VALUES (?, ?, ?, current_timestamp)";
+    private static final String QUERY_FOR_ADD = "INSERT INTO news (title, content, date) VALUES (?, ?, current_timestamp)";
     private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM news ORDER BY id DESC LIMIT 10";
+//    private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM users INNER JOIN news ORDER BY news.id DESC LIMIT 10";
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
 
@@ -27,17 +28,15 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
-    private static final String WHO_WROTE_PARAM = "author";
     private static final String DATE_PARAM = "date";
 
     @Override
-    public void add(String title, String content, String username) throws DAOException {
+    public void add(String title, String content) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
 
                 statement.setString(1, title);
                 statement.setString(2, content);
-                statement.setString(3, username);
                 statement.execute();
             }
         } catch (SQLException e) {
@@ -73,7 +72,6 @@ public class NewsDAOImpl implements NewsDAO {
                         newsList.add(new News(
                                 resultSet.getString(TITLE_PARAM),
                                 resultSet.getString(CONTENT_PARAM),
-                                resultSet.getString(WHO_WROTE_PARAM),
                                 resultSet.getDate(DATE_PARAM)
                         ));
                     }

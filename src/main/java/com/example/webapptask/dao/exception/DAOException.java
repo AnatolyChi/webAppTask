@@ -1,4 +1,4 @@
-package com.example.webapptask.dao.exception;
+package com.example.webAppTask.dao.exception;
 
 public class DAOException extends Exception {
 

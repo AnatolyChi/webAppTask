@@ -1,10 +1,10 @@
-package com.example.webapptask.controller.impl;
+package com.example.webAppTask.controller.impl;
 
-import com.example.webapptask.bean.News;
-import com.example.webapptask.controller.Command;
-import com.example.webapptask.service.NewsService;
-import com.example.webapptask.service.exception.ServiceException;
-import com.example.webapptask.service.ServiceProvider;
+import com.example.webAppTask.bean.News;
+import com.example.webAppTask.controller.Command;
+import com.example.webAppTask.service.NewsService;
+import com.example.webAppTask.service.exception.ServiceException;
+import com.example.webAppTask.service.ServiceProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

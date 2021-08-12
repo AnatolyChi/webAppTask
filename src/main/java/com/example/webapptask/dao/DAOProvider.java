@@ -1,7 +1,7 @@
-package com.example.webapptask.dao;
+package com.example.webAppTask.dao;
 
-import com.example.webapptask.dao.impl.NewsDAOImpl;
-import com.example.webapptask.dao.impl.UserDAOImpl;
+import com.example.webAppTask.dao.impl.NewsDAOImpl;
+import com.example.webAppTask.dao.impl.UserDAOImpl;
 
 public class DAOProvider {
     private static final DAOProvider INSTANCE = new DAOProvider();

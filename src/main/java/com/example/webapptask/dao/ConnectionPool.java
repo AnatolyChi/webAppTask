@@ -1,4 +1,4 @@
-package com.example.webapptask.dao;
+package com.example.webAppTask.dao;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.extern.slf4j.Slf4j;

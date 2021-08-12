@@ -1,4 +1,4 @@
-package com.example.webapptask.controller;
+package com.example.webAppTask.controller;
 
 public enum CommandName {
     REGISTRATION_NEW_USER,

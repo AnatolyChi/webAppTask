@@ -1,4 +1,4 @@
-package com.example.webapptask.bean;
+package com.example.webAppTask.bean;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;

@@ -1,6 +1,6 @@
-package com.example.webapptask.controller;
+package com.example.webAppTask.controller;
 
-import com.example.webapptask.controller.impl.*;
+import com.example.webAppTask.controller.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;

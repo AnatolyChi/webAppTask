@@ -15,6 +15,7 @@
         <fmt:message bundle="${loc}" key="local.email" var="email"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
         <fmt:message bundle="${loc}" key="local.date.reg" var="date"/>
+        <fmt:message bundle="${loc}" key="local.age" var="age"/>
     </head>
     <body>
         <jsp:include page="headerForForm.jsp"/>
@@ -25,6 +26,7 @@
                     <div>
                         <p>${firstname}: <span>${sessionScope.user.firstName}</span></p>
                         <p>${lastname}: <span>${sessionScope.user.lastName}</span></p>
+                        <p>${age}: <span>${sessionScope.user.age}</span></p>
                         <p>${email}: <span>${sessionScope.user.email}</span></p>
                         <hr>
                         <p>${date}: <span>${sessionScope.user.dateRegistered}</span></p>
@@ -46,6 +48,10 @@
                         <div class="field">
                             <label class="field" for="lastname">${lastname}:</label>
                             <input class="per_input" id="lastname" type="text" name="lastname">
+                        </div>
+                        <div class="field">
+                            <label class="field" for="age">${age}:</label>
+                            <input class="per_input" id="age" type="number" name="age">
                         </div>
                         <div class="field">
                             <label class="field" for="email">${email}:</label>

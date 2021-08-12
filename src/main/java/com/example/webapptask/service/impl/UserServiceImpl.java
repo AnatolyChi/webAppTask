@@ -1,12 +1,12 @@
-package com.example.webapptask.service.impl;
+package com.example.webAppTask.service.impl;
 
-import com.example.webapptask.bean.RegistrationInfo;
-import com.example.webapptask.bean.User;
-import com.example.webapptask.dao.exception.DAOException;
-import com.example.webapptask.dao.DAOProvider;
-import com.example.webapptask.dao.UserDAO;
-import com.example.webapptask.service.exception.ServiceException;
-import com.example.webapptask.service.UserService;
+import com.example.webAppTask.bean.RegistrationInfo;
+import com.example.webAppTask.bean.User;
+import com.example.webAppTask.dao.exception.DAOException;
+import com.example.webAppTask.dao.DAOProvider;
+import com.example.webAppTask.dao.UserDAO;
+import com.example.webAppTask.service.exception.ServiceException;
+import com.example.webAppTask.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -19,9 +19,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> registration(RegistrationInfo info) throws ServiceException {
-        validate(info);
-        Optional<User> user;
+        if (validate(info)) {
+            throw new ServiceException(ERR_MESSAGE);
+        }
 
+        Optional<User> user;
         try {
             user = USER_DAO.get(info);
             if (!user.isPresent()) {
@@ -37,9 +39,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> authorization(RegistrationInfo info) throws ServiceException {
-        validate(info);
-        Optional<User> user;
+        if (validate(info)) {
+            throw new ServiceException(ERR_MESSAGE);
+        }
 
+        Optional<User> user;
         try {
             user = USER_DAO.get(info);
         } catch (DAOException e) {
@@ -51,12 +55,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void personalUpdate(User user, String firstName, String lastName, String email) throws ServiceException {
+    public void personalUpdate(User user, String firstName, String lastName, String email, String age) throws ServiceException {
         if ((firstName != null && !firstName.equals(user.getFirstName())) ||
                 (lastName != null && !lastName.equals(user.getLastName())) ||
                 (email != null && !email.equals(user.getEmail()))) {
             try {
-                USER_DAO.update(user, firstName, lastName, email);
+                USER_DAO.update(user, firstName, lastName, email, age);
             } catch (DAOException e) {
                 e.printStackTrace();
                 throw new ServiceException(e);
@@ -64,12 +68,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private void validate(RegistrationInfo info) throws ServiceException {
-        if (info.getLogin() == null ||
-            info.getLogin().isEmpty() ||
-            info.getPassword() == null ||
-            info.getPassword().isEmpty()) {
-            throw new ServiceException(ERR_MESSAGE);
-        }
+    private boolean validate(RegistrationInfo info) {
+        return  info.getLogin() == null ||
+                info.getLogin().isEmpty() ||
+                info.getPassword() == null ||
+                info.getPassword().isEmpty();
     }
 }

@@ -1,7 +1,7 @@
-package com.example.webapptask.service;
+package com.example.webAppTask.service;
 
-import com.example.webapptask.service.impl.NewsServiceImpl;
-import com.example.webapptask.service.impl.UserServiceImpl;
+import com.example.webAppTask.service.impl.NewsServiceImpl;
+import com.example.webAppTask.service.impl.UserServiceImpl;
 
 public class ServiceProvider {
     private static final ServiceProvider INSTANCE = new ServiceProvider();
