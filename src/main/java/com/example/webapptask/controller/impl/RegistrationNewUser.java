@@ -44,7 +44,6 @@ public class RegistrationNewUser implements Command {
             }
         } catch (ServiceException e) {
             log.error(LOG_ERROR, e);
-            e.printStackTrace();
             resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }

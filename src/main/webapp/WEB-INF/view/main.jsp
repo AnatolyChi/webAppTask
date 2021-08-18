@@ -20,12 +20,34 @@
                 <c:if test="${newsList != null}">
                     <div style="margin-top: 50px">
                         <c:forEach var="news" items="${newsList}">
+<%--                            <form id="m_versions" method="POST" action="index.php"></br>--%>
+<%--                                <input type="hidden" name="form_sent" value="Скрытая кнопка" /></br>--%>
+<%--                                <a href=# onclick="document.getElementById('m_versions').submit()" >ссылка</a></br>--%>
+<%--                            </form></br>--%>
+<%--                            <form id="news_form" action="/controller" method="POST">--%>
+<%--                                <input type="hidden" name="command" value="NEWS_PAGE">--%>
+<%--                                <a href=# onclick="document.getElementById('news_form').onsubmit">--%>
+<%--                                    --%>
+<%--                                </a>--%>
+<%--                            </form>--%>
+<%--                            <div class="newsMain">--%>
+<%--                                <p style="font-size: xx-small; text-align: left">${author}: ${news.author}</p>--%>
+<%--                                <p style="font-size: xx-small; text-align: left">${news.date}</p>--%>
+<%--                                <a href="controller?command=NEWS_PAGE">--%>
+<%--                                        ${news.title}--%>
+<%--                                    <input type="hidden" name="title" value="${news.title}">--%>
+<%--                                    <input type="hidden" name="content" value="${news.content}">--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
                             <div class="newsMain">
-                                <p style="font-size: xx-small; text-align: left">${author}: ${news.author}</p>
-                                <p style="font-size: xx-small; text-align: left">${news.date}</p>
-                                    ${news.title}
-                                <hr>
-                                    ${news.content}
+                                <form action="/controller" method="POST">
+                                    <p style="font-size: xx-small; text-align: left">${author}: ${news.author}</p>
+                                    <p style="font-size: xx-small; text-align: left">${news.date}</p>
+                                    <input type="hidden" name="title" value="${news.title}">
+                                    <input type="hidden" name="content" value="${news.content}">
+                                    <input type="hidden" name="command" value="NEWS_PAGE">
+                                    <input type="submit" class="input_news" value="${news.title}">
+                                </form>
                             </div>
                         </c:forEach>
                     </div>

@@ -16,9 +16,10 @@ import java.util.List;
 @Slf4j
 public class NewsDAOImpl implements NewsDAO {
 
-    private static final String QUERY_FOR_ADD = "INSERT INTO news (title, content, date) VALUES (?, ?, current_timestamp)";
-    private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM news ORDER BY id DESC LIMIT 10";
-//    private static final String QUERY_FOR_READ_ALL_LAST = "SELECT * FROM users INNER JOIN news ORDER BY news.id DESC LIMIT 10";
+    private static final String QUERY_FOR_ADD =
+            "INSERT INTO news (title, content, user_id_fk, date) VALUES (?, ?, (SELECT id FROM user WHERE login = ?), current_timestamp)";
+    private static final String QUERY_FOR_READ_ALL_LAST =
+            "SELECT title, content, login, date FROM news INNER JOIN user ON news.user_id_fk = user.id ORDER BY DATE DESC LIMIT 10";
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
 
@@ -28,16 +29,18 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
+    private static final String LOGIN_PARAM = "login";
     private static final String DATE_PARAM = "date";
 
     @Override
-    public void add(String title, String content) throws DAOException {
+    public void add(String title, String content, String userLogin) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
 
                 statement.setString(1, title);
                 statement.setString(2, content);
-                statement.execute();
+                statement.setString(3, userLogin);
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             log.error(LOG_ON_ADD, e);
@@ -72,6 +75,7 @@ public class NewsDAOImpl implements NewsDAO {
                         newsList.add(new News(
                                 resultSet.getString(TITLE_PARAM),
                                 resultSet.getString(CONTENT_PARAM),
+                                resultSet.getString(LOGIN_PARAM),
                                 resultSet.getDate(DATE_PARAM)
                         ));
                     }

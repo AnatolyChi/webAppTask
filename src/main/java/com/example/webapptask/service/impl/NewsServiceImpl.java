@@ -21,18 +21,17 @@ public class NewsServiceImpl implements NewsService {
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
 
     @Override
-    public boolean addNews(String title, String content) throws ServiceException {
-        validate(title, content);
+    public boolean addNews(String title, String content, String userLogin) throws ServiceException {
+        validate(title, content, userLogin);
         boolean statusAdded = false;
 
         try {
             if (!NEWS_DAO.findByTitle(title)) {
-                NEWS_DAO.add(title, content);
+                NEWS_DAO.add(title, content, userLogin);
                 statusAdded = true;
             }
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_ADD);
-            e.printStackTrace();
             throw new ServiceException(e);
         }
 
@@ -47,7 +46,6 @@ public class NewsServiceImpl implements NewsService {
             NEWS_DAO.delete(title);
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_DELETE);
-            e.printStackTrace();
             throw new ServiceException(e);
         }
     }
@@ -58,7 +56,6 @@ public class NewsServiceImpl implements NewsService {
             return NEWS_DAO.readAllLast();
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_READ_ALL);
-            e.printStackTrace();
             throw new ServiceException(e);
         }
     }

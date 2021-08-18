@@ -29,6 +29,7 @@ public class GoToMainPage implements Command {
         try {
             newsList = newsService.newsList();
         } catch (ServiceException e) {
+            // log
             e.printStackTrace();
         }
 

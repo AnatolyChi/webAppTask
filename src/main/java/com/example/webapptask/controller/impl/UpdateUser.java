@@ -39,7 +39,6 @@ public class UpdateUser implements Command {
             resp.sendRedirect(PERSONAL_PAGE_COMMAND);
         } catch (ServiceException e) {
             log.error(LOG_ERROR, e);
-            e.printStackTrace();
             resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }

@@ -15,11 +15,9 @@ import java.util.Optional;
 @Slf4j
 public class UserDAOImpl implements UserDAO {
 
-    private static final String QUERY_FOR_GET = "SELECT * FROM users WHERE login = ?";
-    private static final String QUERY_FOR_ADD =
-            "INSERT INTO users (login, password, dateRegistered) VALUES (?, ?, ?)";
-    private static final String QUERY_FOR_UPDATE =
-            "UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE login = ?";
+    private static final String QUERY_FOR_GET = "SELECT * FROM user WHERE login = ?";
+    private static final String QUERY_FOR_ADD = "INSERT INTO user (login, password, dateRegistered) VALUES (?, ?, ?)";
+    private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ? WHERE login = ?";
 
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>News</title>
+        <title>Adding News</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
         <fmt:setLocale value="${sessionScope.local}"/>
         <fmt:setBundle basename="localization.local" var="loc"/>

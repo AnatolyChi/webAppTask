@@ -106,6 +106,18 @@ textarea {
     transition: 0.4s ease-in-out;
 }
 
+.input_news {
+    border: 0;
+    outline: none;
+    background: skyblue;
+    font-size: medium;
+}
+
+.input_news:hover {
+    background: #75e7d2;
+    transition: 0.4s ease-in-out;
+}
+
 .per_input {
     margin: 5px 20px;
     width: 200px;

@@ -10,6 +10,7 @@ public enum CommandName {
     REGISTRATION,
     UPDATE_USER,
     MAIN_PAGE,
+    NEWS_PAGE,
     OUT_USER,
     ADD_NEWS,
     NEWS
