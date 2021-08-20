@@ -21,6 +21,7 @@ public class RegistrationNewUser implements Command {
     private static final UserService USER_SERVICE = PROVIDER.getUSER_SERVICE();
 
     private static final String USER_SESSION = "user";
+    private static final String USER_LOGIN_PARAM = "user_login";
     private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
     private static final String MESSAGE_ERROR_PARAM = "message";
     private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
@@ -34,11 +35,12 @@ public class RegistrationNewUser implements Command {
         try {
             Optional<User> userOptional = USER_SERVICE.registration(info);
 
-            if (!userOptional.isPresent()) {
+            if (userOptional.isPresent()) {
                 HttpSession session = req.getSession(true);
-                session.setAttribute(USER_SESSION, new User(info.getLogin(), info.getDate()));
+                session.setAttribute(USER_SESSION, userOptional.get());
                 resp.sendRedirect(MAIN_PAGE_COMMAND);
             } else {
+                req.setAttribute(USER_LOGIN_PARAM, info.getLogin());
                 req.setAttribute(MESSAGE_ERROR_PARAM, MESSAGE_ERROR_PARAM);
                 req.getRequestDispatcher(REGISTRATION_PAGE).forward(req, resp);
             }

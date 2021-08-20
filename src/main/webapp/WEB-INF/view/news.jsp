@@ -9,7 +9,7 @@
     </head>
     <body>
         <jsp:include page="headerForForm.jsp"/>
-        <div style="margin-left: 70px; margin-right: 70px">
+        <div style="margin-left: 100px; margin-right: 100px; margin-top: 50px">
             <p style="text-align: center">${title}</p>
             <hr>
             <p style="text-align: center">${content}</p>

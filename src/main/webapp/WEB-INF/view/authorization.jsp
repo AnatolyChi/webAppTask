@@ -30,7 +30,8 @@
             <form action="/controller" method="POST">
                 <label for="login">
                     ${login}:
-                    <input id="login" class="login" name="login" required minlength="3" autofocus>
+                    <input id="login" class="login" name="login"
+                           required minlength="3" autofocus autocomplete="on">
                 </label>
                 <br>
                 <label for="password">

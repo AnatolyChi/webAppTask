@@ -39,7 +39,6 @@ public class ConnectionPool {
             CPDS.setMaxPoolSize(5);
         } catch (PropertyVetoException e) {
             log.error(LOG_PROPERTY_VETO_EX, e);
-            e.printStackTrace();
         }
     }
 }

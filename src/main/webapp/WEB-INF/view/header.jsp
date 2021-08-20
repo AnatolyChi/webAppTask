@@ -22,12 +22,12 @@
                 <img style="margin-top: 20px; margin-left: 20px" width="350" src="../../resources/img/News.svg.png" alt="news">
             </div>
             <div style="float: left; margin-top: 20px">
-                <form action="/controller" method="POST">
+                <form action="/controller" method="GET">
                     <input type="hidden" name="local" value="ru">
                     <input type="hidden" name="command" value="CHANGE_LOCALE">
                     <input type="submit" value="${ru_button}" >
                 </form>
-                <form action="/controller" method="POST">
+                <form action="/controller" method="GET">
                     <input type="hidden" name="local" value="en">
                     <input type="hidden" name="command" value="CHANGE_LOCALE">
                     <input type="submit" value="${en_button}">

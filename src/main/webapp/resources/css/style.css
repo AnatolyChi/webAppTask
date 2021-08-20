@@ -125,8 +125,29 @@ textarea {
     border-radius: 5px;
 }
 
-div.field {
-    /*text-align: right;*/
+.div_form_person {
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.form_person {
+    padding: 20px;
+    border: 1px solid #44567e;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.label_form_person {
+    width: 100px;
+    float: left;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.input_form_person {
+    width: 300px;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 label.field {
@@ -135,13 +156,4 @@ label.field {
 
 span {
     text-align: right;
-}
-
-/* Добавление подчеркивания при наведении */
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }

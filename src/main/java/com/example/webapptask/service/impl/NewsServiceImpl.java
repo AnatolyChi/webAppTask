@@ -15,14 +15,17 @@ public class NewsServiceImpl implements NewsService {
     private static final DAOProvider PROVIDER = DAOProvider.getInstance();
     private static final NewsDAO NEWS_DAO = PROVIDER.getNEWS_DAO();
 
-    private static final String ERR_MESSAGE = "Incorrect variables";
+    private static final String LOG_ERROR_VALIDATE = "validate err";
     private static final String LOG_ERROR_ON_ADD = "news not was added";
     private static final String LOG_ERROR_ON_DELETE = "news not was deleted";
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
 
     @Override
     public boolean addNews(String title, String content, String userLogin) throws ServiceException {
-        validate(title, content, userLogin);
+        if (validate(title, content, userLogin)) {
+            log.error(LOG_ERROR_VALIDATE);
+            throw new ServiceException();
+        }
         boolean statusAdded = false;
 
         try {
@@ -40,7 +43,10 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void deleteNews(String title) throws ServiceException {
-        validate(title);
+        if (validate(title)) {
+            log.error(LOG_ERROR_VALIDATE);
+            throw new ServiceException();
+        }
 
         try {
             NEWS_DAO.delete(title);
@@ -60,11 +66,16 @@ public class NewsServiceImpl implements NewsService {
         }
     }
 
-    private void validate(String ... values) throws ServiceException {
+    private boolean validate(String ... values) {
+        boolean isVal = false;
+
         for (String value : values) {
             if (value == null || value.isEmpty()) {
-                throw new ServiceException(ERR_MESSAGE);
+                isVal = true;
+                break;
             }
         }
+
+        return isVal;
     }
 }

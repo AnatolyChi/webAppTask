@@ -15,20 +15,18 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static final DAOProvider PROVIDER = DAOProvider.getInstance();
     private static final UserDAO USER_DAO = PROVIDER.getUSER_DAO();
-    private static final String ERR_MESSAGE = "Incorrect login or password";
+    private static final String LOG_ERR_MESSAGE = "Incorrect login or password";
 
     @Override
     public Optional<User> registration(RegistrationInfo info) throws ServiceException {
         if (validate(info)) {
-            throw new ServiceException(ERR_MESSAGE);
+            log.error(LOG_ERR_MESSAGE);
+            throw new ServiceException();
         }
 
         Optional<User> user;
         try {
-            user = USER_DAO.get(info);
-            if (!user.isPresent()) {
-                USER_DAO.add(info);
-            }
+            user = USER_DAO.add(info);
         } catch (DAOException e) {
             e.printStackTrace();
             throw new ServiceException(e);
@@ -40,14 +38,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> authorization(RegistrationInfo info) throws ServiceException {
         if (validate(info)) {
-            throw new ServiceException(ERR_MESSAGE);
+            log.error(LOG_ERR_MESSAGE);
+            throw new ServiceException();
         }
 
         Optional<User> user;
         try {
             user = USER_DAO.get(info);
         } catch (DAOException e) {
-            e.printStackTrace();
             throw new ServiceException(e);
         }
 
@@ -59,10 +57,10 @@ public class UserServiceImpl implements UserService {
         if ((firstName != null && !firstName.equals(user.getFirstName())) ||
                 (lastName != null && !lastName.equals(user.getLastName())) ||
                 (email != null && !email.equals(user.getEmail()))) {
+
             try {
                 USER_DAO.update(user, firstName, lastName, email, age);
             } catch (DAOException e) {
-                e.printStackTrace();
                 throw new ServiceException(e);
             }
         }

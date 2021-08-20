@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--@elvariable id="message" type="java.lang.String"--%>
+<%--@elvariable id="user_login" type="java.lang.String"--%>
 <html>
     <head>
         <title>Registration</title>
@@ -30,12 +31,14 @@
             <form action="/controller" method="POST">
                 <label for="login">
                     ${login}:
-                    <input id="login" class="login" type="text" name="login" required minlength="3" autofocus>
+                        <input id="login" class="login" type="text" name="login"
+                               value="${user_login}" required minlength="3" autocomplete="on">
                 </label>
                 <br>
                 <label for="password">
                     ${password}:
-                    <input id="password" class="pass" type="password" name="password" required minlength="5">
+                        <input id="password" class="pass" type="password" name="password"
+                               required minlength="5">
                 </label>
                 <br>
                 <input type="hidden" name="command" value="REGISTRATION_NEW_USER">

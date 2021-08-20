@@ -36,38 +36,49 @@
                         <input type="hidden" name="edit" value="edit">
                         <input class="submit" type="submit" value="Edit">
                     </form>
+                    <p style="clear: both; margin-left: 240px">
+                        <button onclick="location.href='..'">${back}</button>
+                    </p>
                 </div>
             </c:when>
             <c:when test="${edit != null}">
                 <div style="margin: 30px 17% 0; float: left">
-                    <form action="/controller" method="POST">
-                        <div class="field">
-                            <label class="field" for="firstname">${firstname}:</label>
-                            <input class="per_input" id="firstname" type="text" name="firstname" autofocus>
+                    <form action="/controller" method="POST" class="form_person">
+                        <div class="div_form_person">
+                            <label class="label_form_person" for="firstname">
+                                    ${firstname}:
+                            </label>
+                            <input class="input_form_person" id="firstname" type="text" name="firstname" autofocus>
                         </div>
-                        <div class="field">
-                            <label class="field" for="lastname">${lastname}:</label>
-                            <input class="per_input" id="lastname" type="text" name="lastname">
+                        <div class="div_form_person">
+                            <label class="label_form_person" for="lastname">
+                                    ${lastname}:
+                            </label>
+                            <input class="input_form_person" id="lastname" type="text" name="lastname">
                         </div>
-                        <div class="field">
-                            <label class="field" for="age">${age}:</label>
-                            <input class="per_input" id="age" type="number" name="age">
+                        <div class="div_form_person">
+                            <label class="label_form_person" for="age">
+                                    ${age}:
+                            </label>
+                            <input class="input_form_person" id="age" type="number" name="age">
                         </div>
-                        <div class="field">
-                            <label class="field" for="email">${email}:</label>
-                            <input class="per_input" id="email" type="email" name="email" aria-required="false">
+                        <div class="div_form_person">
+                            <label class="label_form_person" for="email">
+                                    ${email}:
+                            </label>
+                            <input class="input_form_person" id="email" type="email" name="email" aria-required="false">
                         </div>
-                        <div class="field">
+                        <div class="div_form_person">
                             <input type="hidden" name="command" value="UPDATE_USER">
-                            <input class="submit" type="submit" value="Submit">
+                            <input style="margin-left: 100px" class="submit" type="submit" value="Submit">
                         </div>
                     </form>
+                    <p style="clear: both; margin-left: 240px">
+                        <button onclick="location.href='..'">${back}</button>
+                    </p>
                 </div>
             </c:when>
         </c:choose>
-        <p style="clear: both; margin-left: 240px">
-            <button onclick="location.href='..'">${back}</button>
-        </p>
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

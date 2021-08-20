@@ -1,6 +1,5 @@
 package com.example.webapptask.controller.impl;
 
-import com.example.webapptask.bean.User;
 import com.example.webapptask.controller.Command;
 import com.example.webapptask.service.NewsService;
 import com.example.webapptask.service.ServiceProvider;
@@ -30,8 +29,6 @@ public class AddNews implements Command {
         String title = req.getParameter(TITLE_PARAM);
         String content = req.getParameter(CONTENT_PARAM);
         String userLogin = req.getParameter(AUTHOR_PARAM);
-
-//        User user = (User) req.getSession().getAttribute("user");
 
         try {
             if (NEWS_SERVICE.addNews(title, content, userLogin)) {

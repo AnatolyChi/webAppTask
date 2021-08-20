@@ -17,9 +17,9 @@ import java.util.List;
 public class NewsDAOImpl implements NewsDAO {
 
     private static final String QUERY_FOR_ADD =
-            "INSERT INTO news (title, content, user_id_fk, date) VALUES (?, ?, (SELECT id FROM user WHERE login = ?), current_timestamp)";
+            "INSERT INTO news (title, content, user_id, date) VALUES (?, ?, (SELECT user_id FROM user WHERE login = ?), current_timestamp)";
     private static final String QUERY_FOR_READ_ALL_LAST =
-            "SELECT title, content, login, date FROM news INNER JOIN user ON news.user_id_fk = user.id ORDER BY DATE DESC LIMIT 10";
+            "SELECT title, content, login, date FROM news INNER JOIN user ON news.user_id = user.user_id ORDER BY DATE DESC LIMIT 10";
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
 
@@ -34,14 +34,13 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     public void add(String title, String content, String userLogin) throws DAOException {
-        try (Connection connection = ConnectionPool.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
 
-                statement.setString(1, title);
-                statement.setString(2, content);
-                statement.setString(3, userLogin);
-                statement.executeUpdate();
-            }
+            statement.setString(1, title);
+            statement.setString(2, content);
+            statement.setString(3, userLogin);
+            statement.executeUpdate();
         } catch (SQLException e) {
             log.error(LOG_ON_ADD, e);
             throw new DAOException(e);
@@ -51,12 +50,11 @@ public class NewsDAOImpl implements NewsDAO {
     @Override
     // До конца не реализован, т.к. ещё не используется
     public void delete(String title) throws DAOException {
-        try (Connection connection = ConnectionPool.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
 
-                statement.setString(1, title);
-                statement.executeUpdate();
-            }
+            statement.setString(1, title);
+            statement.executeUpdate();
         } catch (SQLException e) {
             log.error(LOG_ON_DELETE, e);
             throw new DAOException(e);
@@ -67,18 +65,17 @@ public class NewsDAOImpl implements NewsDAO {
     public List<News> readAllLast() throws DAOException {
         List<News> newsList = new ArrayList<>();
 
-        try (Connection connection = ConnectionPool.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_READ_ALL_LAST)) {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_READ_ALL_LAST)) {
 
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        newsList.add(new News(
-                                resultSet.getString(TITLE_PARAM),
-                                resultSet.getString(CONTENT_PARAM),
-                                resultSet.getString(LOGIN_PARAM),
-                                resultSet.getDate(DATE_PARAM)
-                        ));
-                    }
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    newsList.add(new News(
+                            resultSet.getString(TITLE_PARAM),
+                            resultSet.getString(CONTENT_PARAM),
+                            resultSet.getString(LOGIN_PARAM),
+                            resultSet.getDate(DATE_PARAM)
+                    ));
                 }
             }
         } catch (SQLException e) {
@@ -93,15 +90,14 @@ public class NewsDAOImpl implements NewsDAO {
     public boolean findByTitle(String title) throws DAOException {
         boolean searchResult = false;
 
-        try (Connection connection = ConnectionPool.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_BY_TITLE)) {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_BY_TITLE)) {
 
-                statement.setString(1, title);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next() ) {
-                        if (title.equals(resultSet.getString(TITLE_PARAM))) {
-                            searchResult = true;
-                        }
+            statement.setString(1, title);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next() ) {
+                    if (title.equals(resultSet.getString(TITLE_PARAM))) {
+                        searchResult = true;
                     }
                 }
             }
