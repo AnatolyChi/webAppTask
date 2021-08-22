@@ -45,7 +45,7 @@
                             <input class="auth" type="submit" value="${Authorization}">
                         </form>
                     </c:when>
-                    <c:when test="${sessionScope.user != null}">
+                    <c:when test="${sessionScope.user != null && sessionScope.user.role.equals('Admin')}">
                         <p style="font-weight: bold; margin-left: 20px">
                             <c:out value="${greeting} ${sessionScope.user.login}"/>
                         </p>
@@ -56,6 +56,19 @@
                         <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="PERSONAL_PAGE">
                             <input class="auth" type="submit" value="${personal_page}">
+                        </form>
+                        <form action="/controller" method="POST">
+                            <input type="hidden" name="command" value="OUT_USER">
+                            <input class="auth" type="submit" value="${out_user}">
+                        </form>
+                    </c:when>
+                    <c:when test="${sessionScope.user != null && sessionScope.user.role.equals('User')}">
+                        <p style="font-weight: bold; margin-left: 20px">
+                            <c:out value="${greeting} ${sessionScope.user.login}"/>
+                        </p>
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="command" value="PERSONAL_PAGE">
+                            <input class="reg" type="submit" value="${personal_page}">
                         </form>
                         <form action="/controller" method="POST">
                             <input type="hidden" name="command" value="OUT_USER">
