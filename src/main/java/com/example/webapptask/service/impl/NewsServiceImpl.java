@@ -57,9 +57,19 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> newsList() throws ServiceException {
+    public Integer getQuantityNews() throws ServiceException {
         try {
-            return NEWS_DAO.readAllLast();
+            return NEWS_DAO.getQuantityNews();
+        } catch (DAOException e) {
+            log.info(LOG_ERROR_ON_READ_ALL);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<News> newsList(int currentPage, int recordsPerPage) throws ServiceException {
+        try {
+            return NEWS_DAO.findNews(currentPage, recordsPerPage);
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_READ_ALL);
             throw new ServiceException(e);

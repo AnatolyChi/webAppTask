@@ -6,8 +6,9 @@
 <html>
     <head>
         <title>News</title>
+        <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
         <fmt:setLocale value="${sessionScope.local}"/>
-        <fmt:setBundle basename="loclization.local" var="loc"/>
+        <fmt:setBundle basename="localization.local" var="loc"/>
 
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
     </head>
@@ -18,7 +19,7 @@
             <hr>
             <p style="text-align: center">${content}</p>
         </div>
-        <p style="margin-top: 50px">
+        <p style="margin-top: 50px; text-align: center">
             <button onclick="location.href='..'">${back}</button>
         </p>
         <jsp:include page="footer.jsp"/>

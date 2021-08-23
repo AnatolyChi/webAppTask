@@ -8,5 +8,6 @@ import java.util.List;
 public interface NewsService {
     boolean addNews(String title, String content, String userLogin) throws ServiceException;
     void deleteNews(String title) throws ServiceException;
-    List<News> newsList() throws ServiceException;
+    Integer getQuantityNews() throws ServiceException;
+    List<News> newsList(int currentPage, int recordsPerPage) throws ServiceException;
 }

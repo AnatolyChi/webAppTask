@@ -18,14 +18,15 @@ public class NewsDAOImpl implements NewsDAO {
 
     private static final String QUERY_FOR_ADD =
             "INSERT INTO news (title, content, user_id, date) VALUES (?, ?, (SELECT user_id FROM user WHERE login = ?), current_timestamp)";
-    private static final String QUERY_FOR_READ_ALL_LAST =
-            "SELECT title, content, login, date FROM news INNER JOIN user ON news.user_id = user.user_id ORDER BY DATE DESC LIMIT 10";
+    private static final String QUERY_FOR_FIND_NEWS = "SELECT * FROM news INNER JOIN user USING(user_id) LIMIT ?, ?";
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
+    private static final String QUERY_FOR_COUNT_ROWS = "SELECT COUNT(news_id) FROM news";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
 
     private static final String LOG_ON_ADD = "error on add News";
     private static final String LOG_ON_DELETE = "error on delete by title";
-    private static final String LOG_ON_READ_ALL_LAST = "error on read news";
+    private static final String LOG_ON_FIND_NEWS = "error on find news";
+    private static final String LOG_ON_COUNT_ROWS = "error on count rows";
     private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
@@ -62,14 +63,18 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public List<News> readAllLast() throws DAOException {
+    public List<News> findNews(int currentPage, int recordsPerPage) throws DAOException {
         List<News> newsList = new ArrayList<>();
 
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_READ_ALL_LAST)) {
+        int start = currentPage * recordsPerPage - recordsPerPage;
 
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_NEWS)) {
+
+            statement.setInt(1, start);
+            statement.setInt(2, recordsPerPage);
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
+                while(resultSet.next()) {
                     newsList.add(new News(
                             resultSet.getString(TITLE_PARAM),
                             resultSet.getString(CONTENT_PARAM),
@@ -79,11 +84,32 @@ public class NewsDAOImpl implements NewsDAO {
                 }
             }
         } catch (SQLException e) {
-            log.error(LOG_ON_READ_ALL_LAST, e);
+            log.error(LOG_ON_FIND_NEWS);
+            e.printStackTrace();
             throw new DAOException(e);
         }
 
         return newsList;
+    }
+
+    @Override
+    public Integer getQuantityNews() throws DAOException {
+        int numOfRows = 0;
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_COUNT_ROWS)) {
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    numOfRows = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            log.error(LOG_ON_COUNT_ROWS);
+            throw new DAOException(e);
+        }
+
+        return numOfRows;
     }
 
     @Override
