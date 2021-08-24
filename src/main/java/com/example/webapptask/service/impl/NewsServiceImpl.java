@@ -19,6 +19,7 @@ public class NewsServiceImpl implements NewsService {
     private static final String LOG_ERROR_ON_ADD = "news not was added";
     private static final String LOG_ERROR_ON_DELETE = "news not was deleted";
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
+    private static final String LOG_ERROR_ON_UPDATE = "new not was updated";
 
     @Override
     public boolean addNews(String title, String content, String userLogin) throws ServiceException {
@@ -52,6 +53,21 @@ public class NewsServiceImpl implements NewsService {
             NEWS_DAO.delete(title);
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_DELETE);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateNews(String title, String content) throws ServiceException {
+        if (validate(title, content)) {
+            log.error(LOG_ERROR_VALIDATE);
+            throw new ServiceException();
+        }
+
+        try {
+            NEWS_DAO.update(title, content);
+        } catch (DAOException e) {
+            log.info(LOG_ERROR_ON_UPDATE);
             throw new ServiceException(e);
         }
     }

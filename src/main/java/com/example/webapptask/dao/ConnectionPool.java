@@ -33,10 +33,10 @@ public class ConnectionPool {
             CPDS.setUser(resourceBundle.getString(USER_NAME));
             CPDS.setPassword(resourceBundle.getString(PASSWORD));
 
-            CPDS.setInitialPoolSize(5);
-            CPDS.setMinPoolSize(5);
-            CPDS.setAcquireIncrement(5);
-            CPDS.setMaxPoolSize(5);
+            CPDS.setInitialPoolSize(10);
+            CPDS.setMinPoolSize(10);
+            CPDS.setAcquireIncrement(10);
+            CPDS.setMaxPoolSize(10);
         } catch (PropertyVetoException e) {
             log.error(LOG_PROPERTY_VETO_EX, e);
         }

@@ -22,9 +22,11 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_COUNT_ROWS = "SELECT COUNT(news_id) FROM news";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
+    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE title = ?";
 
     private static final String LOG_ON_ADD = "error on add News";
     private static final String LOG_ON_DELETE = "error on delete by title";
+    private static final String LOG_ON_UPDATE = "error on update by title";
     private static final String LOG_ON_FIND_NEWS = "error on find news";
     private static final String LOG_ON_COUNT_ROWS = "error on count rows";
     private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
@@ -49,7 +51,6 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    // До конца не реализован, т.к. ещё не используется
     public void delete(String title) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
@@ -58,6 +59,21 @@ public class NewsDAOImpl implements NewsDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             log.error(LOG_ON_DELETE, e);
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public void update(String title, String content) throws DAOException {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_UPDATE)) {
+
+            statement.setString(1, title);
+            statement.setString(2, content);
+            statement.setString(3, title);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            log.error(LOG_ON_UPDATE);
             throw new DAOException(e);
         }
     }

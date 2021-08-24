@@ -1,8 +1,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="content" type="java.lang.String"--%>
+<%--@elvariable id="title" type="java.lang.String"--%>
 <html>
     <head>
-        <title>Adding News</title>
+        <title>Update News</title>
         <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
         <fmt:setLocale value="${sessionScope.local}"/>
         <fmt:setBundle basename="localization.local" var="loc"/>
@@ -20,17 +22,16 @@
                 <p><b>${title_news}</b></p>
                 <p>
                     <label>
-                        <textarea name="title" rows="1" cols="90" required autofocus></textarea>
+                        <textarea name="title" rows="1" cols="90" required autofocus>${title}</textarea>
                     </label>
                 </p>
                 <p><b>${content_news}</b></p>
                 <p>
                     <label>
-                        <textarea name="content" rows="30" cols="90" required></textarea>
+                        <textarea name="content" rows="30" cols="90" required>${content}</textarea>
                     </label>
                 </p>
-                <input type="hidden" name="author" value="${sessionScope.user.login}">
-                <input type="hidden" name="command" value="ADD_NEWS">
+                <input type="hidden" name="command" value="UPDATE_NEWS">
                 <input class="submit" type="submit" value="Submit">
             </form>
             <p>
