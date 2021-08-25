@@ -19,6 +19,7 @@ public class UpdateNews implements Command {
 
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
+    private static final String CURRENT_TITLE_PARAM = "currentTitle";
     private static final String LOG_ERROR = "unknown command";
     private static final String UNKNOWN_COMMAND = "controller?command=UNKNOWN_COMMAND";
     private static final String MAIN_PAGE_COMMAND = "controller?command=MAIN_PAGE";
@@ -27,9 +28,10 @@ public class UpdateNews implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter(TITLE_PARAM);
         String content = req.getParameter(CONTENT_PARAM);
+        String currentTitle = req.getParameter(CURRENT_TITLE_PARAM);
 
         try {
-            NEWS_SERVICE.updateNews(title, content);
+            NEWS_SERVICE.updateNews(title, content, currentTitle);
             resp.sendRedirect(MAIN_PAGE_COMMAND);
         } catch (ServiceException e) {
             log.error(LOG_ERROR, e);

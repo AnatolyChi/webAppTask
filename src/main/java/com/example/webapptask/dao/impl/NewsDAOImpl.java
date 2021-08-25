@@ -64,13 +64,13 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public void update(String title, String content) throws DAOException {
+    public void update(String title, String content, String currentTitle) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_UPDATE)) {
 
             statement.setString(1, title);
             statement.setString(2, content);
-            statement.setString(3, title);
+            statement.setString(3, currentTitle);
             statement.executeUpdate();
         } catch (SQLException e) {
             log.error(LOG_ON_UPDATE);

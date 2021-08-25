@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="currentTitle" type="java.lang.String"--%>
 <%--@elvariable id="content" type="java.lang.String"--%>
 <%--@elvariable id="title" type="java.lang.String"--%>
 <html>
@@ -31,6 +32,7 @@
                         <textarea name="content" rows="30" cols="90" required>${content}</textarea>
                     </label>
                 </p>
+                <input type="hidden" name="currentTitle" value="${currentTitle}">
                 <input type="hidden" name="command" value="UPDATE_NEWS">
                 <input class="submit" type="submit" value="Submit">
             </form>

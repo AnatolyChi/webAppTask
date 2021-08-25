@@ -58,14 +58,14 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void updateNews(String title, String content) throws ServiceException {
-        if (validate(title, content)) {
+    public void updateNews(String title, String content, String currentTitle) throws ServiceException {
+        if (validate(title, content, currentTitle)) {
             log.error(LOG_ERROR_VALIDATE);
             throw new ServiceException();
         }
 
         try {
-            NEWS_DAO.update(title, content);
+            NEWS_DAO.update(title, content, currentTitle);
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_UPDATE);
             throw new ServiceException(e);
