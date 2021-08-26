@@ -10,6 +10,7 @@ public interface NewsDAO {
     void delete(String title) throws DAOException;
     void update(String title, String content, String currentTitle) throws DAOException;
     List<News> findNews(int currentPage, int recordsPerPage) throws DAOException;
+    List<News> searchNews(String tegNews) throws DAOException;
     Integer getQuantityNews() throws DAOException;
     boolean findByTitle(String title) throws DAOException;
 }

@@ -20,6 +20,7 @@ public class NewsServiceImpl implements NewsService {
     private static final String LOG_ERROR_ON_DELETE = "news not was deleted";
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
     private static final String LOG_ERROR_ON_UPDATE = "new not was updated";
+    private static final String LOG_ERROR_ON_SEARCH = "new not was searched";
 
     @Override
     public boolean addNews(String title, String content, String userLogin) throws ServiceException {
@@ -88,6 +89,21 @@ public class NewsServiceImpl implements NewsService {
             return NEWS_DAO.findNews(currentPage, recordsPerPage);
         } catch (DAOException e) {
             log.info(LOG_ERROR_ON_READ_ALL);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<News> searchNews(String tegNews) throws ServiceException {
+        if (validate(tegNews)) {
+            log.error(LOG_ERROR_VALIDATE);
+            throw new ServiceException();
+        }
+
+        try {
+            return NEWS_DAO.searchNews(tegNews);
+        } catch (DAOException e) {
+            log.info(LOG_ERROR_ON_SEARCH);
             throw new ServiceException(e);
         }
     }

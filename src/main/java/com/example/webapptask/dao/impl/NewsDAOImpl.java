@@ -18,17 +18,19 @@ public class NewsDAOImpl implements NewsDAO {
 
     private static final String QUERY_FOR_ADD =
             "INSERT INTO news (title, content, user_id, date) VALUES (?, ?, (SELECT user_id FROM user WHERE login = ?), current_timestamp)";
+    private static final String QUERY_FOR_SEARCH = "SELECT * FROM news INNER JOIN user USING(user_id) WHERE title LIKE ?";
     private static final String QUERY_FOR_FIND_NEWS = "SELECT * FROM news INNER JOIN user USING(user_id) LIMIT ?, ?";
+    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE title = ?";
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_COUNT_ROWS = "SELECT COUNT(news_id) FROM news";
     private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
-    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE title = ?";
 
     private static final String LOG_ON_ADD = "error on add News";
     private static final String LOG_ON_DELETE = "error on delete by title";
     private static final String LOG_ON_UPDATE = "error on update by title";
     private static final String LOG_ON_FIND_NEWS = "error on find news";
     private static final String LOG_ON_COUNT_ROWS = "error on count rows";
+    private static final String LOG_ON_SEARCH_NEWS = "error on search news";
     private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
@@ -101,6 +103,34 @@ public class NewsDAOImpl implements NewsDAO {
             }
         } catch (SQLException e) {
             log.error(LOG_ON_FIND_NEWS);
+            throw new DAOException(e);
+        }
+
+        return newsList;
+    }
+
+    @Override
+    public List<News> searchNews(String tegNews) throws DAOException {
+        List<News> newsList = new ArrayList<>();
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_SEARCH)) {
+
+            statement.setString(1, "%" + tegNews + "%");
+//            statement.setString(2, "%" + tegNews);
+//            statement.setString(3, tegNews + "%");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    newsList.add(new News(
+                            resultSet.getString(TITLE_PARAM),
+                            resultSet.getString(CONTENT_PARAM),
+                            resultSet.getString(LOGIN_PARAM),
+                            resultSet.getDate(DATE_PARAM)
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            log.error(LOG_ON_SEARCH_NEWS);
             e.printStackTrace();
             throw new DAOException(e);
         }

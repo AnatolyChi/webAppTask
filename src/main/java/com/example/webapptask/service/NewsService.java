@@ -11,4 +11,5 @@ public interface NewsService {
     void updateNews(String title, String content, String currentTitle) throws ServiceException;
     Integer getQuantityNews() throws ServiceException;
     List<News> newsList(int currentPage, int recordsPerPage) throws ServiceException;
+    List<News> searchNews(String tegNews) throws ServiceException;
 }

@@ -21,6 +21,7 @@
         <fmt:message bundle="${loc}" key="local.news.page.records" var="records"/>
         <fmt:message bundle="${loc}" key="local.news.update" var="update"/>
         <fmt:message bundle="${loc}" key="local.news.delete" var="delete"/>
+        <fmt:message bundle="${loc}" key="local.news.search" var="search"/>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
@@ -28,6 +29,18 @@
             <c:when test="${sessionScope.user != null}">
                 <c:if test="${newsList != null}">
                     <div style="margin-top: 50px">
+
+                        <!-- Поиск по тегу -->
+                        <div style="margin-left: 20px">
+                            <form action="/controller" method="GET">
+                                <p>
+                                    <input type="search" name="tegNews" placeholder="${search}">
+                                    <input type="hidden" name="command" value="MAIN_PAGE">
+                                    <input type="submit" value="Submit">
+                                </p>
+                            </form>
+                        </div>
+
                         <c:forEach var="news" items="${newsList}">
                             <div class="newsMain">
                                 <form action="/controller" method="POST">
