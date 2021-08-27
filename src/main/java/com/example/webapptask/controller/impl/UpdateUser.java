@@ -8,6 +8,7 @@ import com.example.webapptask.service.exception.ServiceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class UpdateUser implements Command {
 
         try {
             USER_SERVICE.personalUpdate(user, firstName, lastName, email, age);
+//            req.getSession().setAttribute(USER_SESSION, user);
             resp.sendRedirect(PERSONAL_PAGE_COMMAND);
         } catch (ServiceException e) {
             log.error(LOG_ERROR, e);

@@ -13,24 +13,25 @@
         <fmt:message bundle="${loc}" key="local.authorization" var="Authorization"/>
         <fmt:message bundle="${loc}" key="local.user.out" var="out_user"/>
         <fmt:message bundle="${loc}" key="local.news.add" var="add_news"/>
-        <fmt:message bundle="${loc}" key="local.personalpage" var="personal_page"/>
+        <fmt:message bundle="${loc}" key="local.personal_page" var="personal_page"/>
         <fmt:message bundle="${loc}" key="local.greeting" var="greeting"/>
+        <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
         <header>
-            <div style="float: left; width: 95%">
+            <div style="float: left; width: 91%">
                 <img style="margin-top: 20px; margin-left: 20px" width="350" src="../../resources/img/News.svg.png" alt="news">
             </div>
             <div style="float: left; margin-top: 20px">
-                <form action="/controller" method="GET">
-                    <input type="hidden" name="local" value="ru">
+                <form action="/controller" method="POST">
+                    <label>
+                        <select name="local">
+                            <option value="ru">${ru_button}</option>
+                            <option value="en">${en_button}</option>
+                        </select>
+                    </label><br>
                     <input type="hidden" name="command" value="CHANGE_LOCALE">
-                    <input type="submit" value="${ru_button}" >
-                </form>
-                <form action="/controller" method="GET">
-                    <input type="hidden" name="local" value="en">
-                    <input type="hidden" name="command" value="CHANGE_LOCALE">
-                    <input type="submit" value="${en_button}">
+                    <input type="submit" value="${submit}">
                 </form>
             </div>
             <div style="clear: both">
@@ -57,7 +58,7 @@
                             <input type="hidden" name="command" value="PERSONAL_PAGE">
                             <input class="auth" type="submit" value="${personal_page}">
                         </form>
-                        <form action="/controller" method="POST">
+                        <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="OUT_USER">
                             <input class="auth" type="submit" value="${out_user}">
                         </form>
@@ -70,7 +71,7 @@
                             <input type="hidden" name="command" value="PERSONAL_PAGE">
                             <input class="reg" type="submit" value="${personal_page}">
                         </form>
-                        <form action="/controller" method="POST">
+                        <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="OUT_USER">
                             <input class="auth" type="submit" value="${out_user}">
                         </form>

@@ -16,13 +16,18 @@ import java.util.Optional;
 public class UserDAOImpl implements UserDAO {
 
     private static final String QUERY_FOR_GET = "SELECT * FROM user INNER JOIN role ON user.role_id = role.role_id WHERE login = ?";
-    private static final String QUERY_FOR_ADD = "INSERT INTO user (login, password, dateRegistered) VALUES (?, ?, ?)";
-    private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ? WHERE login = ?";
+    private static final String QUERY_FOR_ADD = "INSERT INTO user (login, password, date_registered) VALUES (?, ?, ?)";
+    private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ?, age = ? WHERE login = ?";
 
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";
+    private static final String FIRSTNAME = "firstname";
+    private static final String LASTNAME = "lastname";
+    private static final String EMAIL = "email";
+    private static final String AGE = "age";
     private static final String ROLE = "role_name";
-    private static final String DATE_REGISTERED = "dateRegistered";
+    private static final String DEFAULT_ROLE = "User";
+    private static final String DATE_REGISTERED = "date_registered";
     private static final String ERROR_ON_GET = "error on get User";
     private static final String ERROR_ON_ADD = "error on add User";
     private static final String ERROR_ON_UPDATE = "error on update User";
@@ -43,6 +48,10 @@ public class UserDAOImpl implements UserDAO {
                             .verify(resultSet.getString(PASSWORD))) {
                         optionalUser = Optional.of(new User(
                                 resultSet.getString(LOGIN),
+                                resultSet.getString(FIRSTNAME),
+                                resultSet.getString(LASTNAME),
+                                resultSet.getString(EMAIL),
+                                resultSet.getString(AGE),
                                 resultSet.getString(ROLE),
                                 resultSet.getDate(DATE_REGISTERED)));
                     }
@@ -74,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
                         statement1.setString(2, createHash(info.getPassword()));
                         statement1.setTimestamp(3, timestamp);
                         statement1.executeUpdate();
-                        optionalUser = Optional.of(new User(info.getLogin(), timestamp));
+                        optionalUser = Optional.of(new User(info.getLogin(), DEFAULT_ROLE, timestamp));
                     }
                 }
             }
@@ -94,7 +103,8 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(1, firstName);
             statement.setString(2, lastName);
             statement.setString(3, email);
-            statement.setString(4, user.getLogin());
+            statement.setString(4, age);
+            statement.setString(5, user.getLogin());
             statement.executeUpdate();
 
             user.setFirstName(firstName);

@@ -17,9 +17,10 @@
         <fmt:message bundle="${loc}" key="local.password" var="password"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
         <fmt:message bundle="${loc}" key="local.valid.authorization" var="not_valid"/>
+        <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
-        <jsp:include page="headerForForm.jsp"/>
+        <jsp:include page="header_for_form.jsp"/>
         <h1 style="margin: 0 17%">${authorization}</h1>
         <div style="margin-left: 43%">
             <p>
@@ -40,7 +41,7 @@
                 </label>
                 <br>
                 <input type="hidden" name="command" value="AUTHORIZATION_USER">
-                <input class="submit" type="submit" value="Submit">
+                <input class="submit" type="submit" value="${submit}">
             </form>
             <p>
                 <button onclick="location.href='..'">${back}</button>

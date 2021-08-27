@@ -10,6 +10,7 @@ public class CommandProvider {
 
     public CommandProvider() {
         COMMANDS.put(CommandName.REGISTRATION_NEW_USER, new RegistrationNewUser());
+        COMMANDS.put(CommandName.UPDATE_PERSONAL_PAGE,  new GoToUpdatePersPage());
         COMMANDS.put(CommandName.AUTHORIZATION_USER,    new AuthorizationUser());
         COMMANDS.put(CommandName.UPDATE_NEWS_PAGE,      new GoToUpdateNewsPage());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND,       new UnknownCommand());

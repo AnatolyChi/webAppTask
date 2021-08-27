@@ -2,6 +2,7 @@ package com.example.webapptask.controller;
 
 public enum CommandName {
     REGISTRATION_NEW_USER,
+    UPDATE_PERSONAL_PAGE,
     AUTHORIZATION_USER,
     UPDATE_NEWS_PAGE,
     UNKNOWN_COMMAND,

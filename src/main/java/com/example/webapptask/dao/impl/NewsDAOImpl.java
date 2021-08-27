@@ -117,8 +117,6 @@ public class NewsDAOImpl implements NewsDAO {
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_SEARCH)) {
 
             statement.setString(1, "%" + tegNews + "%");
-//            statement.setString(2, "%" + tegNews);
-//            statement.setString(3, tegNews + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     newsList.add(new News(

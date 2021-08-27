@@ -20,7 +20,7 @@
         <fmt:message bundle="${loc}" key="local.valid.registration" var="not_valid"/>
     </head>
     <body>
-        <jsp:include page="headerForForm.jsp"/>
+        <jsp:include page="header_for_form.jsp"/>
         <h1 style="margin: 0 17%">${registration}</h1>
         <div style="margin-left: 43%">
             <p>

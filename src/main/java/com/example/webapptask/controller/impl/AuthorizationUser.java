@@ -35,7 +35,7 @@ public class AuthorizationUser implements Command {
             Optional<User> userOptional = USER_SERVICE.authorization(info);
 
             if (userOptional.isPresent()) {
-                HttpSession session = req.getSession(true);
+                HttpSession session = req.getSession();
                 session.setAttribute(USER_SESSION, userOptional.get());
                 resp.sendRedirect(MAIN_PAGE_COMMAND);
             } else {
