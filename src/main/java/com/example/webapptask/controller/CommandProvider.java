@@ -13,6 +13,7 @@ public class CommandProvider {
         COMMANDS.put(CommandName.UPDATE_PERSONAL_PAGE,  new GoToUpdatePersPage());
         COMMANDS.put(CommandName.AUTHORIZATION_USER,    new AuthorizationUser());
         COMMANDS.put(CommandName.UPDATE_NEWS_PAGE,      new GoToUpdateNewsPage());
+        COMMANDS.put(CommandName.ADD_TO_FAVOURITE,      new AddToFavourite());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND,       new UnknownCommand());
         COMMANDS.put(CommandName.AUTHORIZATION,         new GoToAuthorizationPage());
         COMMANDS.put(CommandName.PERSONAL_PAGE,         new GoToPersonalPage());

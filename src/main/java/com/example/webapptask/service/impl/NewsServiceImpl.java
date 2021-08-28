@@ -21,6 +21,7 @@ public class NewsServiceImpl implements NewsService {
     private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
     private static final String LOG_ERROR_ON_UPDATE = "new not was updated";
     private static final String LOG_ERROR_ON_SEARCH = "new not was searched";
+    private static final String LOG_ERROR_ON_ADD_FAVOURITE = "news not was added in favourite";
 
     @Override
     public boolean addNews(String title, String content, String userLogin) throws ServiceException {
@@ -41,6 +42,16 @@ public class NewsServiceImpl implements NewsService {
         }
 
         return statusAdded;
+    }
+
+    @Override
+    public void addToFavourite(String login, String title) throws ServiceException {
+        try {
+            NEWS_DAO.addToFavorite(login, title);
+        } catch (DAOException e) {
+            log.info(LOG_ERROR_ON_ADD_FAVOURITE);
+            throw new ServiceException(e);
+        }
     }
 
     @Override

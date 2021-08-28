@@ -14,6 +14,7 @@
         <fmt:message bundle="${loc}" key="local.news.content" var="content_news"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
         <fmt:message bundle="${loc}" key="local.news.add.err" var="not_valid"/>
+        <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
         <jsp:include page="header_for_form.jsp"/>
@@ -39,7 +40,7 @@
                 </p>
                 <input type="hidden" name="author" value="${sessionScope.user.login}">
                 <input type="hidden" name="command" value="ADD_NEWS">
-                <input class="submit" type="submit" value="Submit">
+                <input class="submit" type="submit" value="${submit}">
             </form>
             <p>
                 <button onclick="location.href='..'">${back}</button>

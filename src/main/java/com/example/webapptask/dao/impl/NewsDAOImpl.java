@@ -16,6 +16,8 @@ import java.util.List;
 @Slf4j
 public class NewsDAOImpl implements NewsDAO {
 
+    private static final String QUERY_FOR_ADD_TO_FAVOURITE =
+            "INSERT INTO favorite_news (user_id, news_id) VALUES ((SELECT user_id FROM user WHERE login = ?), (SELECT news_id FROM news WHERE title = ?))";
     private static final String QUERY_FOR_ADD =
             "INSERT INTO news (title, content, user_id, date) VALUES (?, ?, (SELECT user_id FROM user WHERE login = ?), current_timestamp)";
     private static final String QUERY_FOR_SEARCH = "SELECT * FROM news INNER JOIN user USING(user_id) WHERE title LIKE ?";
@@ -32,6 +34,7 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String LOG_ON_COUNT_ROWS = "error on count rows";
     private static final String LOG_ON_SEARCH_NEWS = "error on search news";
     private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
+    private static final String LOG_ON_ADD_TO_FAVOURITE = "error on add favourite";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
     private static final String LOGIN_PARAM = "login";
@@ -177,5 +180,19 @@ public class NewsDAOImpl implements NewsDAO {
         }
 
         return searchResult;
+    }
+
+    @Override
+    public void addToFavorite(String login, String title) throws DAOException {
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD_TO_FAVOURITE)) {
+
+            statement.setString(1, login);
+            statement.setString(2, title);
+            statement.executeQuery();
+        } catch (SQLException e) {
+            log.error(QUERY_FOR_ADD_TO_FAVOURITE);
+            throw new DAOException(e);
+        }
     }
 }

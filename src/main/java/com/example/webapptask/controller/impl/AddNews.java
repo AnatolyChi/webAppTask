@@ -17,6 +17,7 @@ public class AddNews implements Command {
     private static final NewsService NEWS_SERVICE = PROVIDER.getNEWS_SERVICE();
 
     private static final String GO_TO_ADD_NEWS = "/WEB-INF/view/add_news.jsp";
+    private static final String MAIN_PAGE = "controller?command=MAIN_PAGE";
     private static final String UNKNOWN_COMMAND = "controller?command=UNKNOWN_COMMAND";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
@@ -32,7 +33,7 @@ public class AddNews implements Command {
 
         try {
             if (NEWS_SERVICE.addNews(title, content, userLogin)) {
-                resp.sendRedirect(GO_TO_ADD_NEWS);
+                resp.sendRedirect(MAIN_PAGE);
             } else {
                 req.setAttribute(MESSAGE_ERROR_PARAM, MESSAGE_ERROR_PARAM);
                 req.getRequestDispatcher(GO_TO_ADD_NEWS).forward(req, resp);

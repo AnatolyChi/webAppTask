@@ -17,13 +17,14 @@
     <body>
         <jsp:include page="header_for_form.jsp"/>
 
-        <!-- Здесь добавить форму на добавление новости в любимые -->
+        <!-- Здесь добавить форму на добавление новости в избранные -->
         <div style="margin-left: 100px; margin-right: 100px; margin-top: 50px">
             <c:if test="${err_add != null}">
 
             </c:if>
             <form action="/controller" method="POST">
                 <input type="hidden" name="command" value="ADD_TO_FAVOURITE">
+                <input type="hidden" name="user_login" value="${sessionScope.user.login}">
                 <input type="hidden" name="title" value="${title}">
                 <input type="submit" value="${add}">
             </form>
@@ -32,6 +33,7 @@
             </c:if>
             <form action="/controller" method="POST">
                 <input type="hidden" name="command" value="DELETE_FROM_FAVOURITE">
+                <input type="hidden" name="user_login" value="${sessionScope.user.login}">
                 <input type="hidden" name="title" value="${title}">
                 <input type="submit" value="${delete}">
             </form>
@@ -43,7 +45,7 @@
             <button onclick="location.href='..'">${back}</button>
         </p>
 
-        <!-- Здесь добавить отображение списка любимых новостей -->
+        <!-- Здесь добавить отображение списка избранных новостей -->
 
         <jsp:include page="footer.jsp"/>
     </body>

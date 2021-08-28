@@ -13,4 +13,5 @@ public interface NewsDAO {
     List<News> searchNews(String tegNews) throws DAOException;
     Integer getQuantityNews() throws DAOException;
     boolean findByTitle(String title) throws DAOException;
+    void addToFavorite(String login, String title) throws DAOException;
 }
