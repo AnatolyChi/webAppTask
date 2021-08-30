@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebFilter;
 
 import java.io.IOException;
 
-@WebFilter
+@WebFilter()
 public class SessionFilter implements Filter {
 
     @Override

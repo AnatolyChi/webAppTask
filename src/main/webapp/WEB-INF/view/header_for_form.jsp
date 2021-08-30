@@ -16,7 +16,7 @@
                 <img style="margin-top: 20px; margin-left: 20px" width="350" src="../../resources/img/News.svg.png" alt="news">
             </div>
             <div style="float: left; margin-top: 20px">
-                <form action="/controller" method="POST">
+                <form action="/controller" method="GET">
                     <label>
                         <select name="local">
                             <option value="ru">${ru_button}</option>

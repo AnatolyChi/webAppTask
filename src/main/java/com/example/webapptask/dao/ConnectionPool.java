@@ -1,14 +1,14 @@
 package com.example.webapptask.dao;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-@Slf4j
+@Log4j2
 public class ConnectionPool {
     private static final ComboPooledDataSource CPDS = new ComboPooledDataSource();
 

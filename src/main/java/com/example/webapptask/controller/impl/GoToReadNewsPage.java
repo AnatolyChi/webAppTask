@@ -7,7 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class GoToNewsPage implements Command {
+public class GoToReadNewsPage implements Command {
+
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
     private static final String NEWS_PAGE = "/WEB-INF/view/news.jsp";

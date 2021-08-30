@@ -3,34 +3,32 @@ package com.example.webapptask.dao.impl;
 import com.amdelamar.jhash.Hash;
 import com.amdelamar.jhash.exception.InvalidHashException;
 import com.example.webapptask.bean.RegistrationInfo;
+import com.example.webapptask.bean.UpdateUserInfo;
 import com.example.webapptask.bean.User;
 import com.example.webapptask.dao.ConnectionPool;
 import com.example.webapptask.dao.exception.DAOException;
 import com.example.webapptask.dao.UserDAO;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.*;
 import java.util.Optional;
 
-@Slf4j
+@Log4j2
 public class UserDAOImpl implements UserDAO {
 
     private static final String QUERY_FOR_GET = "SELECT * FROM user INNER JOIN role ON user.role_id = role.role_id WHERE login = ?";
     private static final String QUERY_FOR_ADD = "INSERT INTO user (login, password, date_registered) VALUES (?, ?, ?)";
-    private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ?, age = ? WHERE login = ?";
+    private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ?, age = ? WHERE user_id = ?";
 
-    private static final String LOGIN = "login";
-    private static final String PASSWORD = "password";
-    private static final String FIRSTNAME = "firstname";
-    private static final String LASTNAME = "lastname";
-    private static final String EMAIL = "email";
-    private static final String AGE = "age";
-    private static final String ROLE = "role_name";
-    private static final String DEFAULT_ROLE = "User";
-    private static final String DATE_REGISTERED = "date_registered";
-    private static final String ERROR_ON_GET = "error on get User";
-    private static final String ERROR_ON_ADD = "error on add User";
-    private static final String ERROR_ON_UPDATE = "error on update User";
+    private static final String ID_PARAM = "user_id";
+    private static final String LOGIN_PARAM = "login";
+    private static final String PASSWORD_PARAM = "password";
+    private static final String FIRSTNAME_PARAM = "firstname";
+    private static final String LASTNAME_PARAM = "lastname";
+    private static final String EMAIL_PARAM = "email";
+    private static final String AGE_PARAM = "age";
+    private static final String ROLE_PARAM = "role_name";
+    private static final String DATE_REGISTERED_PARAM = "date_registered";
 
     @Override
     public Optional<User> get(RegistrationInfo info) throws DAOException {
@@ -45,20 +43,23 @@ public class UserDAOImpl implements UserDAO {
                     if (Hash.password(info
                             .getPassword()
                             .toCharArray())
-                            .verify(resultSet.getString(PASSWORD))) {
-                        optionalUser = Optional.of(new User(
-                                resultSet.getString(LOGIN),
-                                resultSet.getString(FIRSTNAME),
-                                resultSet.getString(LASTNAME),
-                                resultSet.getString(EMAIL),
-                                resultSet.getString(AGE),
-                                resultSet.getString(ROLE),
-                                resultSet.getDate(DATE_REGISTERED)));
+                            .verify(resultSet.getString(PASSWORD_PARAM))) {
+                        optionalUser = Optional.of(
+                                new User.Builder().id(resultSet.getInt(ID_PARAM))
+                                        .login(resultSet.getString(LOGIN_PARAM))
+                                        .firstname(resultSet.getString(FIRSTNAME_PARAM))
+                                        .lastname(resultSet.getString(LASTNAME_PARAM))
+                                        .email(resultSet.getString(EMAIL_PARAM))
+                                        .age(resultSet.getInt(AGE_PARAM))
+                                        .role(resultSet.getString(ROLE_PARAM))
+                                        .dateRegistered(resultSet.getDate(DATE_REGISTERED_PARAM))
+                                        .build()
+                        );
                     }
                 }
             }
         } catch (SQLException | InvalidHashException e) {
-            log.error(ERROR_ON_GET, e);
+            log.error("error on get user", e);
             throw new DAOException(e);
         }
 
@@ -66,8 +67,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> add(RegistrationInfo info) throws DAOException {
-        Optional<User> optionalUser = Optional.empty();
+    public boolean add(RegistrationInfo info) throws DAOException {
+        boolean isComplete = false;
 
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_GET)){
@@ -83,36 +84,31 @@ public class UserDAOImpl implements UserDAO {
                         statement1.setString(2, createHash(info.getPassword()));
                         statement1.setTimestamp(3, timestamp);
                         statement1.executeUpdate();
-                        optionalUser = Optional.of(new User(info.getLogin(), DEFAULT_ROLE, timestamp));
+                        isComplete = true;
                     }
                 }
             }
         } catch (SQLException e) {
-            log.error(ERROR_ON_ADD, e);
+            log.error("error on add user", e);
             throw new DAOException(e);
         }
 
-        return optionalUser;
+        return isComplete;
     }
 
     @Override
-    public void update(User user, String firstName, String lastName, String email, String age) throws DAOException {
+    public void update(UpdateUserInfo info) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_UPDATE)) {
 
-            statement.setString(1, firstName);
-            statement.setString(2, lastName);
-            statement.setString(3, email);
-            statement.setString(4, age);
-            statement.setString(5, user.getLogin());
+            statement.setString(1, info.getFirstname());
+            statement.setString(2, info.getLastname());
+            statement.setString(3, info.getEmail());
+            statement.setInt(4, info.getAge());
+            statement.setInt(5, info.getUserId());
             statement.executeUpdate();
-
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setEmail(email);
-            user.setAge(age);
         } catch (SQLException e) {
-            log.error(ERROR_ON_UPDATE);
+            log.error("error on update user", e);
             throw new DAOException(e);
         }
     }

@@ -13,7 +13,7 @@
         <fmt:message bundle="${loc}" key="local.news.title" var="title_news"/>
         <fmt:message bundle="${loc}" key="local.news.content" var="content_news"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
-        <fmt:message bundle="${loc}" key="local.news.add.err" var="not_valid"/>
+        <fmt:message bundle="${loc}" key="local.news.add.err" var="not_reg"/>
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
@@ -22,7 +22,7 @@
         <div style="margin-left: 28%">
             <p style="font-size: small; margin-left: 70px">
                 <c:if test="${message_err != null}">
-                    ${not_valid}
+                    ${not_reg}
                 </c:if>
             </p>
             <form action="/controller" method="POST">
@@ -38,7 +38,7 @@
                         <textarea name="content" rows="30" cols="90" required></textarea>
                     </label>
                 </p>
-                <input type="hidden" name="author" value="${sessionScope.user.login}">
+                <input type="hidden" name="user_id" value="${sessionScope.user.id}">
                 <input type="hidden" name="command" value="ADD_NEWS">
                 <input class="submit" type="submit" value="${submit}">
             </form>

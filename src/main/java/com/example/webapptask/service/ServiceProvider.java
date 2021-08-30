@@ -14,11 +14,11 @@ public class ServiceProvider {
         return INSTANCE;
     }
 
-    public UserService getUSER_SERVICE() {
+    public UserService getUserService() {
         return USER_SERVICE;
     }
 
-    public NewsService getNEWS_SERVICE() {
+    public NewsService getNewsService() {
         return NEWS_SERVICE;
     }
 }

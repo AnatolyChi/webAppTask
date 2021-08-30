@@ -51,15 +51,14 @@
                                     </div>
                                     <c:if test="${sessionScope.user.role.equals('Admin')}">
 
-                                        <!-- Возможно стоить удалять и обновлять по id -->
                                         <div style="float: right">
-                                            <a href="controller?command=UPDATE_NEWS_PAGE&title=${news.title}&content=${news.content}"
+                                            <a href="controller?command=GO_TO_UPDATE_NEWS_PAGE&news_id=${news.newsId}&title=${news.title}&content=${news.content}"
                                                style="font-size: small">${update}</a><br>
-                                            <a href="controller?command=DELETE_NEWS&title=${news.title}"
+                                            <a href="controller?command=DELETE_NEWS&news_id=${news.newsId}"
                                                style="font-size: small">${delete}</a>
                                         </div>
                                     </c:if>
-                                    <input type="hidden" name="command" value="NEWS_PAGE">
+                                    <input type="hidden" name="command" value="GO_TO_READ_NEWS_PAGE">
                                     <input type="hidden" name="title" value="${news.title}">
                                     <input type="hidden" name="content" value="${news.content}">
                                     <input type="submit" class="input_news" value="${news.title}"

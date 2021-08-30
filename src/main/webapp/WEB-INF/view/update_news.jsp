@@ -1,6 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--@elvariable id="currentTitle" type="java.lang.String"--%>
+<%--@elvariable id="news_id" type="java.lang.Integer"--%>
 <%--@elvariable id="content" type="java.lang.String"--%>
 <%--@elvariable id="title" type="java.lang.String"--%>
 <html>
@@ -14,6 +14,7 @@
         <fmt:message bundle="${loc}" key="local.news.title" var="title_news"/>
         <fmt:message bundle="${loc}" key="local.news.content" var="content_news"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
+        <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
         <jsp:include page="header_for_form.jsp"/>
@@ -32,9 +33,9 @@
                         <textarea name="content" rows="30" cols="90" required>${content}</textarea>
                     </label>
                 </p>
-                <input type="hidden" name="currentTitle" value="${currentTitle}">
                 <input type="hidden" name="command" value="UPDATE_NEWS">
-                <input class="submit" type="submit" value="Submit">
+                <input type="hidden" name="news_id" value="${news_id}">
+                <input class="submit" type="submit" value="${submit}">
             </form>
             <p>
                 <button onclick="location.href='..'">${back}</button>

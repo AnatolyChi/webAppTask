@@ -12,7 +12,7 @@ import java.io.IOException;
 public class DeleteFromFavourite implements Command {
 
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final NewsService NEWS_SERVICE = PROVIDER.getNEWS_SERVICE();
+    private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

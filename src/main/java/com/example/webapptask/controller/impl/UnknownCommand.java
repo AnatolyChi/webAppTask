@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UnknownCommand implements Command {
+
     private static final String ERROR_PAGE = "/WEB-INF/view/error_page.jsp";
 
     @Override

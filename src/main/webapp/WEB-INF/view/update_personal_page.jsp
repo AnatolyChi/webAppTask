@@ -1,5 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="valid_err" type="java.lang.String"--%>
 <html>
     <head>
         <title>Update personal page</title>
@@ -11,14 +13,18 @@
         <fmt:message bundle="${loc}" key="local.firstname" var="firstname"/>
         <fmt:message bundle="${loc}" key="local.lastname" var="lastname"/>
         <fmt:message bundle="${loc}" key="local.email" var="email"/>
-        <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
         <fmt:message bundle="${loc}" key="local.age" var="age"/>
+        <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
+        <fmt:message bundle="${loc}" key="local.valid.update.user" var="check_update"/>
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
         <jsp:include page="header_for_form.jsp"/>
         <h1 style="margin: 0 17%">${personal_page}</h1>
         <div style="margin: 30px 17% 0; float: left">
+            <c:if test="${valid_err != null}">
+                <p style="text-align: center">${check_update}</p>
+            </c:if>
             <form action="/controller" method="POST" class="form_person">
                 <div class="div_form_person">
                     <label class="label_form_person" for="firstname">
@@ -50,6 +56,7 @@
                 </div>
                 <div class="div_form_person">
                     <input type="hidden" name="command" value="UPDATE_USER">
+                    <input type="hidden" name="user_id" value="${sessionScope.user.id}">
                     <input style="margin-left: 100px" class="submit" type="submit" value="${submit}">
                 </div>
             </form>

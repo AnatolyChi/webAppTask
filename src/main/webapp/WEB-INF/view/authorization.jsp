@@ -16,7 +16,7 @@
         <fmt:message bundle="${loc}" key="local.login" var="login"/>
         <fmt:message bundle="${loc}" key="local.password" var="password"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
-        <fmt:message bundle="${loc}" key="local.valid.authorization" var="not_valid"/>
+        <fmt:message bundle="${loc}" key="local.valid.authorization" var="not_reg"/>
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
@@ -25,7 +25,7 @@
         <div style="margin-left: 43%">
             <p>
                 <c:if test="${message != null}">
-                    ${not_valid}
+                    <c:out value="${not_reg}"/>
                 </c:if>
             </p>
             <form action="/controller" method="POST">

@@ -7,16 +7,15 @@ import com.example.webapptask.service.exception.ServiceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
-import java.time.temporal.TemporalAdjusters;
 
-@Slf4j
+@Log4j2
 public class AddToFavourite implements Command {
 
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final NewsService NEWS_SERVICE = PROVIDER.getNEWS_SERVICE();
+    private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 
     private static final String TITLE = "title";
     private static final String USER_LOGIN = "user_login";

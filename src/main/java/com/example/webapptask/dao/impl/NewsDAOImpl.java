@@ -4,7 +4,7 @@ import com.example.webapptask.bean.News;
 import com.example.webapptask.dao.ConnectionPool;
 import com.example.webapptask.dao.exception.DAOException;
 import com.example.webapptask.dao.NewsDAO;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,72 +13,64 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
+@Log4j2
 public class NewsDAOImpl implements NewsDAO {
 
     private static final String QUERY_FOR_ADD_TO_FAVOURITE =
             "INSERT INTO favorite_news (user_id, news_id) VALUES ((SELECT user_id FROM user WHERE login = ?), (SELECT news_id FROM news WHERE title = ?))";
-    private static final String QUERY_FOR_ADD =
-            "INSERT INTO news (title, content, user_id, date) VALUES (?, ?, (SELECT user_id FROM user WHERE login = ?), current_timestamp)";
+    private static final String QUERY_FOR_ADD = "INSERT INTO news (user_id, title, content, date) VALUES (?, ?, ?, current_timestamp)";
     private static final String QUERY_FOR_SEARCH = "SELECT * FROM news INNER JOIN user USING(user_id) WHERE title LIKE ?";
     private static final String QUERY_FOR_FIND_NEWS = "SELECT * FROM news INNER JOIN user USING(user_id) LIMIT ?, ?";
-    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE title = ?";
+    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE news_id = ?";
     private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_COUNT_ROWS = "SELECT COUNT(news_id) FROM news";
-    private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE title = ?";
+    private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE news_id = ?";
 
-    private static final String LOG_ON_ADD = "error on add News";
-    private static final String LOG_ON_DELETE = "error on delete by title";
-    private static final String LOG_ON_UPDATE = "error on update by title";
-    private static final String LOG_ON_FIND_NEWS = "error on find news";
-    private static final String LOG_ON_COUNT_ROWS = "error on count rows";
-    private static final String LOG_ON_SEARCH_NEWS = "error on search news";
-    private static final String LOG_ON_FIND_BY_TITLE = "error on find news";
-    private static final String LOG_ON_ADD_TO_FAVOURITE = "error on add favourite";
+    private static final String NEWS_ID_PARAM = "news_id";
+    private static final String LOGIN_PARAM = "login";
     private static final String TITLE_PARAM = "title";
     private static final String CONTENT_PARAM = "content";
-    private static final String LOGIN_PARAM = "login";
     private static final String DATE_PARAM = "date";
 
     @Override
-    public void add(String title, String content, String userLogin) throws DAOException {
+    public void add(int userId, String title, String content) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD)) {
 
-            statement.setString(1, title);
-            statement.setString(2, content);
-            statement.setString(3, userLogin);
+            statement.setInt(1, userId);
+            statement.setString(2, title);
+            statement.setString(3, content);
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error(LOG_ON_ADD, e);
+            log.error("error on add news", e);
             throw new DAOException(e);
         }
     }
 
     @Override
-    public void delete(String title) throws DAOException {
+    public void delete(int newsId) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_DELETE)) {
 
-            statement.setString(1, title);
+            statement.setInt(1, newsId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error(LOG_ON_DELETE, e);
+            log.error("error on delete news", e);
             throw new DAOException(e);
         }
     }
 
     @Override
-    public void update(String title, String content, String currentTitle) throws DAOException {
+    public void update(int newsId, String title, String content) throws DAOException {
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_UPDATE)) {
 
             statement.setString(1, title);
             statement.setString(2, content);
-            statement.setString(3, currentTitle);
+            statement.setInt(3, newsId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error(LOG_ON_UPDATE);
+            log.error("error on update news");
             throw new DAOException(e);
         }
     }
@@ -97,15 +89,16 @@ public class NewsDAOImpl implements NewsDAO {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while(resultSet.next()) {
                     newsList.add(new News(
+                            resultSet.getInt(NEWS_ID_PARAM),
+                            resultSet.getString(LOGIN_PARAM),
                             resultSet.getString(TITLE_PARAM),
                             resultSet.getString(CONTENT_PARAM),
-                            resultSet.getString(LOGIN_PARAM),
                             resultSet.getDate(DATE_PARAM)
                     ));
                 }
             }
         } catch (SQLException e) {
-            log.error(LOG_ON_FIND_NEWS);
+            log.error("error on find news");
             throw new DAOException(e);
         }
 
@@ -123,16 +116,16 @@ public class NewsDAOImpl implements NewsDAO {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     newsList.add(new News(
+                            resultSet.getInt(NEWS_ID_PARAM),
+                            resultSet.getString(LOGIN_PARAM),
                             resultSet.getString(TITLE_PARAM),
                             resultSet.getString(CONTENT_PARAM),
-                            resultSet.getString(LOGIN_PARAM),
                             resultSet.getDate(DATE_PARAM)
                     ));
                 }
             }
         } catch (SQLException e) {
-            log.error(LOG_ON_SEARCH_NEWS);
-            e.printStackTrace();
+            log.error("error on search news");
             throw new DAOException(e);
         }
 
@@ -152,7 +145,7 @@ public class NewsDAOImpl implements NewsDAO {
                 }
             }
         } catch (SQLException e) {
-            log.error(LOG_ON_COUNT_ROWS);
+            log.error("error on count rows news");
             throw new DAOException(e);
         }
 
@@ -175,7 +168,7 @@ public class NewsDAOImpl implements NewsDAO {
                 }
             }
         } catch (SQLException e) {
-            log.error(LOG_ON_FIND_BY_TITLE, e);
+            log.error("error on find by title news", e);
             throw new DAOException(e);
         }
 
@@ -191,7 +184,7 @@ public class NewsDAOImpl implements NewsDAO {
             statement.setString(2, title);
             statement.executeQuery();
         } catch (SQLException e) {
-            log.error(QUERY_FOR_ADD_TO_FAVOURITE);
+            log.error("error on add to favorite news");
             throw new DAOException(e);
         }
     }

@@ -6,9 +6,9 @@ import com.example.webapptask.dao.exception.DAOException;
 import java.util.List;
 
 public interface NewsDAO {
-    void add(String title, String content, String userLogin) throws DAOException;
-    void delete(String title) throws DAOException;
-    void update(String title, String content, String currentTitle) throws DAOException;
+    void add(int userId, String title, String content) throws DAOException;
+    void delete(int newsId) throws DAOException;
+    void update(int newsId, String title, String content) throws DAOException;
     List<News> findNews(int currentPage, int recordsPerPage) throws DAOException;
     List<News> searchNews(String tegNews) throws DAOException;
     Integer getQuantityNews() throws DAOException;

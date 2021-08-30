@@ -8,24 +8,26 @@ import com.example.webapptask.service.ServiceProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.util.List;
 
-@Slf4j
+@Log4j2
 public class GoToMainPage implements Command {
+
     private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
-    private static final NewsService NEWS_SERVICE = PROVIDER.getNEWS_SERVICE();
+    private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String UNKNOWN_COMMAND = "controller?command=UNKNOWN_COMMAND";
     private static final String NEWS_LIST_PARAM = "newsList";
+    private static final String TEG_NEWS_PARAM = "tegNews";
     private static final String N_OF_PAGES_PARAM = "nOfPages";
     private static final String CURRENT_PAGE_PARAM = "currentPage";
-    private static final String TEG_NEWS_PARAM = "tegNews";
     private static final String RECORDS_PER_PAGE_PARAM = "recordsPerPage";
-    private static final String LOG_ON_LIST = "error on main page";
+    private static final String CP_DEFAULT = "1";
+    private static final String RPP_DEFAULT = "4";
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,8 +37,8 @@ public class GoToMainPage implements Command {
         String tegNews = req.getParameter(TEG_NEWS_PARAM);
 
         if (cp == null || rpp == null) {
-            cp = "1";
-            rpp = "4";
+            cp = CP_DEFAULT;
+            rpp = RPP_DEFAULT;
         }
 
         int currentPage = Integer.parseInt(cp);
@@ -45,7 +47,7 @@ public class GoToMainPage implements Command {
         try {
             List<News> newsList;
 
-            if (tegNews == null || "".equals(tegNews)) {
+            if (tegNews == null || tegNews.isEmpty()) {
                 newsList = NEWS_SERVICE.newsList(currentPage, recordsPerPage);
             } else {
                 newsList = NEWS_SERVICE.searchNews(tegNews);
@@ -63,7 +65,7 @@ public class GoToMainPage implements Command {
             req.setAttribute(RECORDS_PER_PAGE_PARAM, recordsPerPage);
             req.getRequestDispatcher(MAIN_PAGE).forward(req, resp);
         } catch (ServiceException e) {
-            log.error(LOG_ON_LIST);
+            log.error("error on main page");
             resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }

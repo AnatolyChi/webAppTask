@@ -6,38 +6,26 @@ import com.example.webapptask.dao.DAOProvider;
 import com.example.webapptask.dao.NewsDAO;
 import com.example.webapptask.service.NewsService;
 import com.example.webapptask.service.exception.ServiceException;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
 
-@Slf4j
+@Log4j2
 public class NewsServiceImpl implements NewsService {
     private static final DAOProvider PROVIDER = DAOProvider.getInstance();
     private static final NewsDAO NEWS_DAO = PROVIDER.getNEWS_DAO();
 
-    private static final String LOG_ERROR_VALIDATE = "validate err";
-    private static final String LOG_ERROR_ON_ADD = "news not was added";
-    private static final String LOG_ERROR_ON_DELETE = "news not was deleted";
-    private static final String LOG_ERROR_ON_READ_ALL = "news not was read";
-    private static final String LOG_ERROR_ON_UPDATE = "new not was updated";
-    private static final String LOG_ERROR_ON_SEARCH = "new not was searched";
-    private static final String LOG_ERROR_ON_ADD_FAVOURITE = "news not was added in favourite";
-
     @Override
-    public boolean addNews(String title, String content, String userLogin) throws ServiceException {
-        if (validate(title, content, userLogin)) {
-            log.error(LOG_ERROR_VALIDATE);
-            throw new ServiceException();
-        }
+    public boolean addNews(int userId, String title, String content) throws ServiceException {
         boolean statusAdded = false;
 
         try {
             if (!NEWS_DAO.findByTitle(title)) {
-                NEWS_DAO.add(title, content, userLogin);
+                NEWS_DAO.add(userId, title, content);
                 statusAdded = true;
             }
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_ADD);
+            log.info("news not was added", e);
             throw new ServiceException(e);
         }
 
@@ -46,89 +34,67 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void addToFavourite(String login, String title) throws ServiceException {
+
         try {
             NEWS_DAO.addToFavorite(login, title);
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_ADD_FAVOURITE);
+            log.info("news not was added to favourite", e);
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public void deleteNews(String title) throws ServiceException {
-        if (validate(title)) {
-            log.error(LOG_ERROR_VALIDATE);
-            throw new ServiceException();
-        }
+    public void deleteNews(int newsId) throws ServiceException {
 
         try {
-            NEWS_DAO.delete(title);
+            NEWS_DAO.delete(newsId);
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_DELETE);
+            log.info("news not was deleted", e);
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public void updateNews(String title, String content, String currentTitle) throws ServiceException {
-        if (validate(title, content, currentTitle)) {
-            log.error(LOG_ERROR_VALIDATE);
-            throw new ServiceException();
-        }
+    public void updateNews(int newsId, String title, String content) throws ServiceException {
 
         try {
-            NEWS_DAO.update(title, content, currentTitle);
+            NEWS_DAO.update(newsId, title, content);
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_UPDATE);
+            log.info("news not was updated", e);
             throw new ServiceException(e);
         }
     }
 
     @Override
     public Integer getQuantityNews() throws ServiceException {
+
         try {
             return NEWS_DAO.getQuantityNews();
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_READ_ALL);
+            log.info("news not was counted", e);
             throw new ServiceException(e);
         }
     }
 
     @Override
     public List<News> newsList(int currentPage, int recordsPerPage) throws ServiceException {
+
         try {
             return NEWS_DAO.findNews(currentPage, recordsPerPage);
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_READ_ALL);
+            log.info("error on create news list", e);
             throw new ServiceException(e);
         }
     }
 
     @Override
     public List<News> searchNews(String tegNews) throws ServiceException {
-        if (validate(tegNews)) {
-            log.error(LOG_ERROR_VALIDATE);
-            throw new ServiceException();
-        }
 
         try {
             return NEWS_DAO.searchNews(tegNews);
         } catch (DAOException e) {
-            log.info(LOG_ERROR_ON_SEARCH);
+            log.info("error on search news", e);
             throw new ServiceException(e);
         }
-    }
-
-    private boolean validate(String ... values) {
-        boolean isVal = false;
-
-        for (String value : values) {
-            if (value == null || value.isEmpty()) {
-                isVal = true;
-                break;
-            }
-        }
-
-        return isVal;
     }
 }

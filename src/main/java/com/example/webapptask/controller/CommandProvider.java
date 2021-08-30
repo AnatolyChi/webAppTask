@@ -9,24 +9,24 @@ public class CommandProvider {
     private final Map<CommandName, Command> COMMANDS = new HashMap<>();
 
     public CommandProvider() {
-        COMMANDS.put(CommandName.REGISTRATION_NEW_USER, new RegistrationNewUser());
-        COMMANDS.put(CommandName.UPDATE_PERSONAL_PAGE,  new GoToUpdatePersPage());
-        COMMANDS.put(CommandName.AUTHORIZATION_USER,    new AuthorizationUser());
-        COMMANDS.put(CommandName.UPDATE_NEWS_PAGE,      new GoToUpdateNewsPage());
-        COMMANDS.put(CommandName.ADD_TO_FAVOURITE,      new AddToFavourite());
-        COMMANDS.put(CommandName.UNKNOWN_COMMAND,       new UnknownCommand());
-        COMMANDS.put(CommandName.AUTHORIZATION,         new GoToAuthorizationPage());
-        COMMANDS.put(CommandName.PERSONAL_PAGE,         new GoToPersonalPage());
-        COMMANDS.put(CommandName.CHANGE_LOCALE,         new ChangeLocale());
-        COMMANDS.put(CommandName.REGISTRATION,          new GoToRegistrationPage());
-        COMMANDS.put(CommandName.UPDATE_USER,           new UpdateUser());
-        COMMANDS.put(CommandName.UPDATE_NEWS,           new UpdateNews());
-        COMMANDS.put(CommandName.DELETE_NEWS,           new DeleteNews());
-        COMMANDS.put(CommandName.MAIN_PAGE,             new GoToMainPage());
-        COMMANDS.put(CommandName.NEWS_PAGE,             new GoToNewsPage());
-        COMMANDS.put(CommandName.OUT_USER,              new OutUser());
-        COMMANDS.put(CommandName.ADD_NEWS,              new AddNews());
-        COMMANDS.put(CommandName.NEWS,                  new GoToAddNewsPage());
+        COMMANDS.put(CommandName.GO_TO_UPDATE_PERSONAL_PAGE,  new GoToUpdatePersPage());
+        COMMANDS.put(CommandName.GO_TO_AUTHORIZATION_PAGE,    new GoToAuthorizationPage());
+        COMMANDS.put(CommandName.GO_TO_REGISTRATION_PAGE,     new GoToRegistrationPage());
+        COMMANDS.put(CommandName.GO_TO_UPDATE_NEWS_PAGE,      new GoToUpdateNewsPage());
+        COMMANDS.put(CommandName.REGISTRATION_NEW_USER,       new RegistrationNewUser());
+        COMMANDS.put(CommandName.GO_TO_READ_NEWS_PAGE,        new GoToReadNewsPage());
+        COMMANDS.put(CommandName.GO_TO_ADD_NEWS_PAGE,         new GoToAddNewsPage());
+        COMMANDS.put(CommandName.GO_TO_PERSONAL_PAGE,         new GoToPersonalPage());
+        COMMANDS.put(CommandName.AUTHORIZATION_USER,          new AuthorizationUser());
+        COMMANDS.put(CommandName.ADD_TO_FAVOURITE,            new AddToFavourite());
+        COMMANDS.put(CommandName.UNKNOWN_COMMAND,             new UnknownCommand());
+        COMMANDS.put(CommandName.CHANGE_LOCALE,               new ChangeLocale());
+        COMMANDS.put(CommandName.UPDATE_USER,                 new UpdateUser());
+        COMMANDS.put(CommandName.UPDATE_NEWS,                 new UpdateNews());
+        COMMANDS.put(CommandName.DELETE_NEWS,                 new DeleteNews());
+        COMMANDS.put(CommandName.MAIN_PAGE,                   new GoToMainPage());
+        COMMANDS.put(CommandName.OUT_USER,                    new OutUser());
+        COMMANDS.put(CommandName.ADD_NEWS,                    new AddNews());
     }
 
     public Command findCommand(String name) {

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToUpdatePersPage implements Command {
+
     private static final String UPDATE_PERSONAL_PAGE = "/WEB-INF/view/update_personal_page.jsp";
 
     @Override

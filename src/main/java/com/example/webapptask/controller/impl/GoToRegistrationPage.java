@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToRegistrationPage implements Command {
+
     private static final String REGISTRATION_PAGE = "/WEB-INF/view/registration.jsp";
 
     @Override

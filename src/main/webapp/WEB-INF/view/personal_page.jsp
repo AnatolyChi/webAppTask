@@ -1,9 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--@elvariable id="UPDATE_PERSONAL_PAGE" type="java.lang.String"--%>
-<%--@elvariable id="PERSONAL_PAGE" type="java.lang.String"--%>
-<%--@elvariable id="command" type="java.lang.String"--%>
 <html>
     <head>
         <title>Personal Page</title>
@@ -27,13 +24,17 @@
             <div>
                 <p>${firstname}: <span>${sessionScope.user.firstName}</span></p>
                 <p>${lastname}: <span>${sessionScope.user.lastName}</span></p>
-                <p>${age}: <span>${sessionScope.user.age}</span></p>
+                <p>${age}:
+                    <c:if test="${sessionScope.user.age > 0}">
+                        <span>${sessionScope.user.age}</span>
+                    </c:if>
+                </p>
                 <p>${email}: <span>${sessionScope.user.email}</span></p>
                 <br>
                 <p>${date}: <span>${sessionScope.user.dateRegistered}</span></p>
             </div>
             <form action="/controller" method="GET">
-                <input type="hidden" name="command" value="UPDATE_PERSONAL_PAGE">
+                <input type="hidden" name="command" value="GO_TO_UPDATE_PERSONAL_PAGE">
                 <input class="submit" type="submit" value="${edit}">
             </form>
             <p style="clear: both; margin-left: 240px">

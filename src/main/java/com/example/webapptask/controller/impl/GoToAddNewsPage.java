@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GoToAddNewsPage implements Command {
+
     private static final String ADD_NEWS_PAGE = "/WEB-INF/view/add_news.jsp";
 
     @Override

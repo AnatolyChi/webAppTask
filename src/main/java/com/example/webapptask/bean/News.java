@@ -11,15 +11,17 @@ import java.util.Date;
 @NoArgsConstructor
 public final class News implements Serializable {
 
+    private int newsId;
+    private String author;
     private String title;
     private String content;
-    private String author;
     private Date date;
 
-    public News(String title, String content, String author, Date date) {
+    public News(int newsId, String author, String title, String content, Date date) {
+        this.newsId = newsId;
+        this.author = author;
         this.title = title;
         this.content = content;
-        this.author = author;
         this.date = date;
     }
 }
