@@ -13,6 +13,7 @@ public interface NewsDAO {
     boolean deleteFromFavourite(int userId, int newsId) throws DAOException;
     boolean findByTitle(String title) throws DAOException;
     List<News> findNews(int currentPage, int recordsPerPage) throws DAOException;
-    List<News> searchNews(String tegNews) throws DAOException;
+    List<News> searchNewsByTags(String tagNews) throws DAOException;
+    List<News> findFavouriteNews(int userId) throws DAOException;
     Integer getQuantityNews() throws DAOException;
 }

@@ -19,7 +19,7 @@
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
-        <jsp:include page="header_for_form.jsp"/>
+        <jsp:include page="header_single.jsp"/>
         <h1 style="margin: 0 17%">${personal_page}</h1>
         <div style="margin: 30px 17% 0; float: left">
             <c:if test="${valid_err != null}">

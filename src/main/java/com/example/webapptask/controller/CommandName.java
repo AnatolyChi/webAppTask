@@ -2,6 +2,7 @@ package com.example.webapptask.controller;
 
 public enum CommandName {
     GO_TO_UPDATE_PERSONAL_PAGE,
+    GO_TO_FAVOURITE_NEWS_PAGE,
     GO_TO_AUTHORIZATION_PAGE,
     GO_TO_REGISTRATION_PAGE,
     GO_TO_UPDATE_NEWS_PAGE,

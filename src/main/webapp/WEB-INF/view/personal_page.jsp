@@ -18,7 +18,7 @@
         <fmt:message bundle="${loc}" key="local.personal_page.edit" var="edit"/>
     </head>
     <body>
-        <jsp:include page="header_for_form.jsp"/>
+        <jsp:include page="header_single.jsp"/>
         <h1 style="margin: 0 17%">${personal_page}</h1>
         <div style="float: left; margin: 30px 200px 0 17%;">
             <div>
@@ -41,6 +41,9 @@
                 <button onclick="location.href='..'">${back}</button>
             </p>
         </div>
+
+        <!-- Добавить отображение избранных новостей здесь -->
+
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

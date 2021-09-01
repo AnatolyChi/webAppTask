@@ -24,9 +24,7 @@
         <fmt:message bundle="${loc}" key="local.news.favourite.delete.err" var="delete_err_loc"/>
     </head>
     <body>
-        <jsp:include page="header_for_form.jsp"/>
-
-        <!-- Здесь добавить форму на добавление новости в избранные -->
+        <jsp:include page="header_single.jsp"/>
         <div style="margin-left: 100px; margin-right: 100px; margin-top: 50px">
             <form action="/controller" method="POST">
                 <input type="hidden" name="command" value="ADD_TO_FAVOURITE">
@@ -64,9 +62,6 @@
         <p style="margin-top: 50px; text-align: center">
             <button onclick="location.href='..'">${back}</button>
         </p>
-
-        <!-- Здесь добавить отображение списка избранных новостей -->
-
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

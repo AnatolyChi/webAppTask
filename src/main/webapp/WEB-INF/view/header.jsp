@@ -18,6 +18,7 @@
         <fmt:message bundle="${loc}" key="local.greeting" var="greeting"/>
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
         <fmt:message bundle="${loc}" key="local.user.complete.reg" var="valid_reg"/>
+        <fmt:message bundle="${loc}" key="local.news.favourite.page" var="favourite_page_name"/>
     </head>
     <body>
         <header>
@@ -66,6 +67,11 @@
                             <input class="auth" type="submit" value="${personal_page}">
                         </form>
                         <form action="/controller" method="GET">
+                            <input type="hidden" name="user_id" value="${sessionScope.user.id}">
+                            <input type="hidden" name="command" value="GO_TO_FAVOURITE_NEWS_PAGE">
+                            <input class="auth" type="submit" value="${favourite_page_name}">
+                        </form>
+                        <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="OUT_USER">
                             <input class="auth" type="submit" value="${out_user}">
                         </form>
@@ -77,6 +83,11 @@
                         <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="GO_TO_PERSONAL_PAGE">
                             <input class="reg" type="submit" value="${personal_page}">
+                        </form>
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="user_id" value="${sessionScope.user.id}">
+                            <input type="hidden" name="command" value="GO_TO_FAVOURITE_NEWS_PAGE">
+                            <input class="auth" type="submit" value="${favourite_page_name}">
                         </form>
                         <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="OUT_USER">

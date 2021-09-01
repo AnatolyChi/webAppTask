@@ -10,6 +10,7 @@ public class CommandProvider {
 
     public CommandProvider() {
         COMMANDS.put(CommandName.GO_TO_UPDATE_PERSONAL_PAGE,  new GoToUpdatePersPage());
+        COMMANDS.put(CommandName.GO_TO_FAVOURITE_NEWS_PAGE,   new GoToFavouriteNewsPage());
         COMMANDS.put(CommandName.GO_TO_AUTHORIZATION_PAGE,    new GoToAuthorizationPage());
         COMMANDS.put(CommandName.GO_TO_REGISTRATION_PAGE,     new GoToRegistrationPage());
         COMMANDS.put(CommandName.GO_TO_UPDATE_NEWS_PAGE,      new GoToUpdateNewsPage());

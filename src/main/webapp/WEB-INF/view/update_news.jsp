@@ -17,7 +17,7 @@
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
     </head>
     <body>
-        <jsp:include page="header_for_form.jsp"/>
+        <jsp:include page="header_single.jsp"/>
         <h1 style="margin: 0 17%">${add_news}</h1>
         <div style="margin-left: 28%">
             <form action="/controller" method="POST">

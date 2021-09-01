@@ -99,10 +99,21 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> searchNews(String tegNews) throws ServiceException {
+    public List<News> favouriteNewsList(int userId) throws ServiceException {
 
         try {
-            return NEWS_DAO.searchNews(tegNews);
+            return NEWS_DAO.findFavouriteNews(userId);
+        } catch (DAOException e) {
+            log.error("error on favourite news list", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<News> searchNewsByTags(String tegNews) throws ServiceException {
+
+        try {
+            return NEWS_DAO.searchNewsByTags(tegNews);
         } catch (DAOException e) {
             log.error("error on search news", e);
             throw new ServiceException(e);

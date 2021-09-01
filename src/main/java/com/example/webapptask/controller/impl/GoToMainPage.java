@@ -50,7 +50,7 @@ public class GoToMainPage implements Command {
             if (tegNews == null || tegNews.isEmpty()) {
                 newsList = NEWS_SERVICE.newsList(currentPage, recordsPerPage);
             } else {
-                newsList = NEWS_SERVICE.searchNews(tegNews);
+                newsList = NEWS_SERVICE.searchNewsByTags(tegNews);
             }
 
             int rows = NEWS_SERVICE.getQuantityNews();
@@ -65,7 +65,7 @@ public class GoToMainPage implements Command {
             req.setAttribute(RECORDS_PER_PAGE_PARAM, recordsPerPage);
             req.getRequestDispatcher(MAIN_PAGE).forward(req, resp);
         } catch (ServiceException e) {
-            log.error("error on main page");
+            log.error("error on main page", e);
             resp.sendRedirect(UNKNOWN_COMMAND);
         }
     }

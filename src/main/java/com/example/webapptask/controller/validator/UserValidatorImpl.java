@@ -7,8 +7,6 @@ public class UserValidatorImpl implements UserValidator {
 
     private static final UserValidator USER_VALIDATOR = new UserValidatorImpl();
 
-//    private static final String LOGIN_CHECK = "^[A-Za-z]([.A-Za-z0-9-]{1,18})([A-Za-z0-9])$";
-//    private static final String PASSWORD_CHECK = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]){5,}";
     private static final String LOGIN_CHECK = "^[A-Za-z]([.A-Za-z0-9-]{1,10})([A-Za-z0-9])$";
     private static final String PASSWORD_CHECK = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{5,}";
     private static final String FIRSTNAME_AND_LASTNAME_CHECK = "^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$";

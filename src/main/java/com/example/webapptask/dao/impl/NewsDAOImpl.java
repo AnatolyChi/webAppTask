@@ -26,6 +26,9 @@ public class NewsDAOImpl implements NewsDAO {
     private static final String QUERY_FOR_ADD_TO_FAVOURITE = "INSERT INTO favorite_news (user_id, news_id) VALUES (?, ?)";
     private static final String QUERY_FOR_GET_FROM_FAVOURITE = "SELECT * FROM favorite_news WHERE user_id = ? AND news_id = ?";
     private static final String QUERY_FOR_DELETE_FROM_FAVOURITE = "DELETE FROM favorite_news WHERE user_id = ? AND news_id = ?";
+    private static final String QUERY_FOR_FIND_FAVOURITE_NEWS =
+                    "SELECT * FROM news INNER JOIN favorite_news ON news.news_id = favorite_news.news_id " +
+                    "INNER JOIN user ON favorite_news.user_id = user.user_id WHERE favorite_news.user_id = ?";
 
     private static final String NEWS_ID_PARAM = "news_id";
     private static final String LOGIN_PARAM = "login";
@@ -107,13 +110,13 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public List<News> searchNews(String tegNews) throws DAOException {
+    public List<News> searchNewsByTags(String tagNews) throws DAOException {
         List<News> newsList = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(QUERY_FOR_SEARCH)) {
 
-            statement.setString(1, "%" + tegNews + "%");
+            statement.setString(1, "%" + tagNews + "%");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     newsList.add(new News(
@@ -127,6 +130,33 @@ public class NewsDAOImpl implements NewsDAO {
             }
         } catch (SQLException e) {
             log.error("error on search news", e);
+            throw new DAOException(e);
+        }
+
+        return newsList;
+    }
+
+    @Override
+    public List<News> findFavouriteNews(int userId) throws DAOException {
+        List<News> newsList = new ArrayList<>();
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_FIND_FAVOURITE_NEWS)) {
+
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    newsList.add(new News(
+                            resultSet.getInt(NEWS_ID_PARAM),
+                            resultSet.getString(LOGIN_PARAM),
+                            resultSet.getString(TITLE_PARAM),
+                            resultSet.getString(CONTENT_PARAM),
+                            resultSet.getDate(DATE_PARAM)
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            log.error("error on find favourite news", e);
             throw new DAOException(e);
         }
 
