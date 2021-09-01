@@ -14,6 +14,7 @@ public class CommandProvider {
         COMMANDS.put(CommandName.GO_TO_REGISTRATION_PAGE,     new GoToRegistrationPage());
         COMMANDS.put(CommandName.GO_TO_UPDATE_NEWS_PAGE,      new GoToUpdateNewsPage());
         COMMANDS.put(CommandName.REGISTRATION_NEW_USER,       new RegistrationNewUser());
+        COMMANDS.put(CommandName.DELETE_FROM_FAVOURITE,       new DeleteFromFavourite());
         COMMANDS.put(CommandName.GO_TO_READ_NEWS_PAGE,        new GoToReadNewsPage());
         COMMANDS.put(CommandName.GO_TO_ADD_NEWS_PAGE,         new GoToAddNewsPage());
         COMMANDS.put(CommandName.GO_TO_PERSONAL_PAGE,         new GoToPersonalPage());

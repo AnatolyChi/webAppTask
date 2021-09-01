@@ -25,7 +25,7 @@ public class NewsServiceImpl implements NewsService {
                 statusAdded = true;
             }
         } catch (DAOException e) {
-            log.info("news not was added", e);
+            log.error("news not was added", e);
             throw new ServiceException(e);
         }
 
@@ -33,12 +33,23 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void addToFavourite(String login, String title) throws ServiceException {
+    public boolean addToFavourite(int userId, int newsId) throws ServiceException {
 
         try {
-            NEWS_DAO.addToFavorite(login, title);
+            return NEWS_DAO.addToFavorite(userId, newsId);
         } catch (DAOException e) {
-            log.info("news not was added to favourite", e);
+            log.error("news was not added to favourite", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean deleteFromFavourite(int userId, int newsId) throws ServiceException {
+
+        try {
+            return NEWS_DAO.deleteFromFavourite(userId, newsId);
+        } catch (DAOException e) {
+            log.error("news was not deleting from favourite", e);
             throw new ServiceException(e);
         }
     }
@@ -49,7 +60,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             NEWS_DAO.delete(newsId);
         } catch (DAOException e) {
-            log.info("news not was deleted", e);
+            log.error("news not was deleted", e);
             throw new ServiceException(e);
         }
     }
@@ -60,7 +71,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             NEWS_DAO.update(newsId, title, content);
         } catch (DAOException e) {
-            log.info("news not was updated", e);
+            log.error("news not was updated", e);
             throw new ServiceException(e);
         }
     }
@@ -71,7 +82,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             return NEWS_DAO.getQuantityNews();
         } catch (DAOException e) {
-            log.info("news not was counted", e);
+            log.error("news not was counted", e);
             throw new ServiceException(e);
         }
     }
@@ -82,7 +93,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             return NEWS_DAO.findNews(currentPage, recordsPerPage);
         } catch (DAOException e) {
-            log.info("error on create news list", e);
+            log.error("error on create news list", e);
             throw new ServiceException(e);
         }
     }
@@ -93,7 +104,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             return NEWS_DAO.searchNews(tegNews);
         } catch (DAOException e) {
-            log.info("error on search news", e);
+            log.error("error on search news", e);
             throw new ServiceException(e);
         }
     }

@@ -16,15 +16,16 @@ import java.util.List;
 @Log4j2
 public class NewsDAOImpl implements NewsDAO {
 
-    private static final String QUERY_FOR_ADD_TO_FAVOURITE =
-            "INSERT INTO favorite_news (user_id, news_id) VALUES ((SELECT user_id FROM user WHERE login = ?), (SELECT news_id FROM news WHERE title = ?))";
     private static final String QUERY_FOR_ADD = "INSERT INTO news (user_id, title, content, date) VALUES (?, ?, ?, current_timestamp)";
+    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE news_id = ?";
+    private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE news_id = ?";
     private static final String QUERY_FOR_SEARCH = "SELECT * FROM news INNER JOIN user USING(user_id) WHERE title LIKE ?";
     private static final String QUERY_FOR_FIND_NEWS = "SELECT * FROM news INNER JOIN user USING(user_id) LIMIT ?, ?";
-    private static final String QUERY_FOR_UPDATE = "UPDATE news SET title = ?, content = ? WHERE news_id = ?";
-    private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
     private static final String QUERY_FOR_COUNT_ROWS = "SELECT COUNT(news_id) FROM news";
-    private static final String QUERY_FOR_DELETE = "DELETE FROM news WHERE news_id = ?";
+    private static final String QUERY_FOR_FIND_BY_TITLE = "SELECT * FROM news WHERE title = ?";
+    private static final String QUERY_FOR_ADD_TO_FAVOURITE = "INSERT INTO favorite_news (user_id, news_id) VALUES (?, ?)";
+    private static final String QUERY_FOR_GET_FROM_FAVOURITE = "SELECT * FROM favorite_news WHERE user_id = ? AND news_id = ?";
+    private static final String QUERY_FOR_DELETE_FROM_FAVOURITE = "DELETE FROM favorite_news WHERE user_id = ? AND news_id = ?";
 
     private static final String NEWS_ID_PARAM = "news_id";
     private static final String LOGIN_PARAM = "login";
@@ -70,7 +71,7 @@ public class NewsDAOImpl implements NewsDAO {
             statement.setInt(3, newsId);
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error("error on update news");
+            log.error("error on update news", e);
             throw new DAOException(e);
         }
     }
@@ -98,7 +99,7 @@ public class NewsDAOImpl implements NewsDAO {
                 }
             }
         } catch (SQLException e) {
-            log.error("error on find news");
+            log.error("error on find news", e);
             throw new DAOException(e);
         }
 
@@ -125,7 +126,7 @@ public class NewsDAOImpl implements NewsDAO {
                 }
             }
         } catch (SQLException e) {
-            log.error("error on search news");
+            log.error("error on search news", e);
             throw new DAOException(e);
         }
 
@@ -145,7 +146,7 @@ public class NewsDAOImpl implements NewsDAO {
                 }
             }
         } catch (SQLException e) {
-            log.error("error on count rows news");
+            log.error("error on count rows news", e);
             throw new DAOException(e);
         }
 
@@ -176,16 +177,57 @@ public class NewsDAOImpl implements NewsDAO {
     }
 
     @Override
-    public void addToFavorite(String login, String title) throws DAOException {
-        try (Connection connection = ConnectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_ADD_TO_FAVOURITE)) {
+    public boolean addToFavorite(int userId, int newsId) throws DAOException {
+        boolean isAdd = false;
 
-            statement.setString(1, login);
-            statement.setString(2, title);
-            statement.executeQuery();
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_GET_FROM_FAVOURITE)) {
+
+            statement.setInt(1, userId);
+            statement.setInt(2, newsId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.next()) {
+
+                    try (PreparedStatement statement1 = connection.prepareStatement(QUERY_FOR_ADD_TO_FAVOURITE)) {
+                        statement1.setInt(1, userId);
+                        statement1.setInt(2, newsId);
+                        statement1.executeUpdate();
+                        isAdd = true;
+                    }
+                }
+            }
         } catch (SQLException e) {
-            log.error("error on add to favorite news");
+            log.error("error on add to favorite news", e);
             throw new DAOException(e);
         }
+        return isAdd;
+    }
+
+    @Override
+    public boolean deleteFromFavourite(int userId, int newsId) throws DAOException {
+        boolean isDelete = false;
+
+        try (Connection connection = ConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(QUERY_FOR_GET_FROM_FAVOURITE)) {
+
+            statement.setInt(1, userId);
+            statement.setInt(2, newsId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+
+                    try (PreparedStatement statement1 = connection.prepareStatement(QUERY_FOR_DELETE_FROM_FAVOURITE)) {
+                        statement1.setInt(1, userId);
+                        statement1.setInt(2, newsId);
+                        statement1.executeUpdate();
+                        isDelete = true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            log.error("error on delete from favourite news", e);
+            throw new DAOException(e);
+        }
+
+        return isDelete;
     }
 }

@@ -53,7 +53,7 @@ public class RegistrationNewUser implements Command {
     }
 
     private boolean littleValidate(RegistrationInfo info) {
-        return info.getLogin() == null || info.getLogin().isEmpty() ||
+        return  info.getLogin() == null || info.getLogin().isEmpty() ||
                 info.getPassword() == null || info.getPassword().isEmpty();
     }
 }

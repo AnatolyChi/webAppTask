@@ -41,7 +41,6 @@ public class AuthorizationUser implements Command {
         }
 
         try {
-            System.err.println("hello i am error");
             Optional<User> userOptional = USER_SERVICE.authorization(info);
 
             if (userOptional.isPresent()) {
@@ -60,7 +59,7 @@ public class AuthorizationUser implements Command {
     }
 
     private boolean littleValidate(RegistrationInfo info) {
-        return info.getLogin() == null || info.getLogin().isEmpty() ||
+        return  info.getLogin() == null || info.getLogin().isEmpty() ||
                 info.getPassword() == null || info.getPassword().isEmpty();
     }
 }

@@ -157,3 +157,7 @@ label.field {
 span {
     text-align: right;
 }
+
+.small_font {
+    font-size: x-small;
+}

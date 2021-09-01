@@ -59,6 +59,7 @@
                                         </div>
                                     </c:if>
                                     <input type="hidden" name="command" value="GO_TO_READ_NEWS_PAGE">
+                                    <input type="hidden" name="news_id" value="${news.newsId}">
                                     <input type="hidden" name="title" value="${news.title}">
                                     <input type="hidden" name="content" value="${news.content}">
                                     <input type="submit" class="input_news" value="${news.title}"
