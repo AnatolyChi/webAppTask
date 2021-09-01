@@ -10,6 +10,7 @@
         <fmt:setBundle basename="localization.local" var="loc"/>
 
         <fmt:message bundle="${loc}" key="local.news.favourite.empty.list" var="empty_list"/>
+        <fmt:message bundle="${loc}" key="local.news.favourite.page" var="favourite_news_title"/>
         <fmt:message bundle="${loc}" key="local.locbutton.back" var="back"/>
         <fmt:message bundle="${loc}" key="local.news.author" var="author"/>
         <fmt:message bundle="${loc}" key="local.news.update" var="update"/>
@@ -17,6 +18,7 @@
     </head>
     <body>
         <jsp:include page="header_single.jsp"/>
+        <h1 style="margin: 0 17%">${favourite_news_title}</h1>
 
         <div style="margin-top: 50px">
             <c:if test="${newsList == null or newsList.size() == 0}">
