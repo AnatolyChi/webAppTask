@@ -44,7 +44,7 @@
 
                         <c:forEach var="news" items="${newsList}">
                             <div class="newsMain">
-                                <form action="/controller" method="GET">
+                                <form action="/controller" method="POST">
                                     <div style="float: left">
                                         <p style="font-size: xx-small; text-align: left">${author}: ${news.author}</p>
                                         <p style="font-size: xx-small; text-align: left">${news.date}</p>

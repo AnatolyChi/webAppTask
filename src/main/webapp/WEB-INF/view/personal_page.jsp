@@ -20,6 +20,7 @@
     <body>
         <jsp:include page="header_single.jsp"/>
         <h1 style="margin: 0 17%">${personal_page}</h1>
+
         <div style="float: left; margin: 30px 200px 0 17%;">
             <div>
                 <p>${firstname}: <span>${sessionScope.user.firstName}</span></p>
@@ -33,7 +34,7 @@
                 <br>
                 <p>${date}: <span>${sessionScope.user.dateRegistered}</span></p>
             </div>
-            <form action="/controller" method="GET">
+            <form action="/controller" method="POST">
                 <input type="hidden" name="command" value="GO_TO_UPDATE_PERSONAL_PAGE">
                 <input class="submit" type="submit" value="${edit}">
             </form>
@@ -41,8 +42,6 @@
                 <button onclick="location.href='..'">${back}</button>
             </p>
         </div>
-
-        <!-- Добавить отображение избранных новостей здесь -->
 
         <jsp:include page="footer.jsp"/>
     </body>

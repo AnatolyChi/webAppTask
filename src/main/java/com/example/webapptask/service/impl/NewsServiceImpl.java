@@ -12,6 +12,7 @@ import java.util.List;
 
 @Log4j2
 public class NewsServiceImpl implements NewsService {
+
     private static final DAOProvider PROVIDER = DAOProvider.getInstance();
     private static final NewsDAO NEWS_DAO = PROVIDER.getNEWS_DAO();
 
