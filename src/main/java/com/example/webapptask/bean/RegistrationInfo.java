@@ -9,7 +9,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public final class RegistrationInfo implements Serializable {
+public class RegistrationInfo implements Serializable {
 
     private static final String LOGIN = "login";
     private static final String PASSWORD = "password";

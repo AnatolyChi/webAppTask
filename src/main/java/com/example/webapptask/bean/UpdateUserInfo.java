@@ -9,7 +9,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public final class UpdateUserInfo implements Serializable {
+public class UpdateUserInfo implements Serializable {
 
     private static final String USER_ID_PARAM = "user_id";
     private static final String FIRSTNAME_PARAM = "firstname";
