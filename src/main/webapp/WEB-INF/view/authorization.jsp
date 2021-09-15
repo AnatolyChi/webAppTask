@@ -41,7 +41,7 @@
                 </label>
                 <br>
                 <input type="hidden" name="command" value="AUTHORIZATION_USER">
-                <input class="submit" type="submit" value="${submit}">
+                <input class="submit" style="margin-top: 15px; margin-left: 50px;" type="submit" value="${submit}">
             </form>
             <p>
                 <button onclick="location.href='..'">${back}</button>

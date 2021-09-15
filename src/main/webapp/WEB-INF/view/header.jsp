@@ -19,6 +19,7 @@
         <fmt:message bundle="${loc}" key="local.locbutton.submit" var="submit"/>
         <fmt:message bundle="${loc}" key="local.user.complete.reg" var="valid_reg"/>
         <fmt:message bundle="${loc}" key="local.news.favourite.page" var="favourite_page_name"/>
+        <fmt:message bundle="${loc}" key="local.write.admin" var="message_to_admin"/>
     </head>
     <body>
         <header>
@@ -88,6 +89,10 @@
                             <input type="hidden" name="user_id" value="${sessionScope.user.id}">
                             <input type="hidden" name="command" value="GO_TO_FAVOURITE_NEWS_PAGE">
                             <input class="auth" type="submit" value="${favourite_page_name}">
+                        </form>
+                        <form action="/controller" method="GET">
+                            <input type="hidden" name="command" value="GO_TO_WRITE_TO_ADMIN">
+                            <input class="auth" type="submit" value="${message_to_admin}">
                         </form>
                         <form action="/controller" method="GET">
                             <input type="hidden" name="command" value="OUT_USER">

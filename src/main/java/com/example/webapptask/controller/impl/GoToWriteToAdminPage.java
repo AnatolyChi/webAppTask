@@ -1,0 +1,18 @@
+package com.example.webapptask.controller.impl;
+
+import com.example.webapptask.controller.Command;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+public class GoToWriteToAdminPage implements Command {
+
+    private static final String WRITE_TO_ADMIN = "/WEB-INF/view/message_to_admin.jsp";
+
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher(WRITE_TO_ADMIN).forward(req, resp);
+    }
+}

@@ -10,6 +10,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 public final class User implements Serializable {
+
     private int id;
     private String login;
     @Setter

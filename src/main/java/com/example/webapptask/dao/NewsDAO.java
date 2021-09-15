@@ -6,6 +6,7 @@ import com.example.webapptask.dao.exception.DAOException;
 import java.util.List;
 
 public interface NewsDAO {
+
     void add(int userId, String title, String content) throws DAOException;
     void delete(int newsId) throws DAOException;
     void update(int newsId, String title, String content) throws DAOException;

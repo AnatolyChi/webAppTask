@@ -17,11 +17,13 @@ public class CommandProvider {
         COMMANDS.put(CommandName.REGISTRATION_NEW_USER,       new RegistrationNewUser());
         COMMANDS.put(CommandName.DELETE_FROM_FAVOURITE,       new DeleteFromFavourite());
         COMMANDS.put(CommandName.GO_TO_READ_NEWS_PAGE,        new GoToReadNewsPage());
+        COMMANDS.put(CommandName.GO_TO_WRITE_TO_ADMIN,        new GoToWriteToAdminPage());
         COMMANDS.put(CommandName.GO_TO_ADD_NEWS_PAGE,         new GoToAddNewsPage());
         COMMANDS.put(CommandName.GO_TO_PERSONAL_PAGE,         new GoToPersonalPage());
         COMMANDS.put(CommandName.AUTHORIZATION_USER,          new AuthorizationUser());
         COMMANDS.put(CommandName.ADD_TO_FAVOURITE,            new AddToFavourite());
         COMMANDS.put(CommandName.UNKNOWN_COMMAND,             new UnknownCommand());
+        COMMANDS.put(CommandName.WRITE_TO_ADMIN,              new WriteToAdmin());
         COMMANDS.put(CommandName.CHANGE_LOCALE,               new ChangeLocale());
         COMMANDS.put(CommandName.UPDATE_USER,                 new UpdateUser());
         COMMANDS.put(CommandName.UPDATE_NEWS,                 new UpdateNews());

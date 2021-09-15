@@ -47,7 +47,7 @@
                 </label>
                 <br>
                 <input type="hidden" name="command" value="REGISTRATION_NEW_USER">
-                <input class="submit" type="submit" value="Submit">
+                <input class="submit" style="margin-top: 15px; margin-left: 50px;" type="submit" value="Submit">
             </form>
             <p>
                 <button onclick="location.href='..'">${back}</button>
