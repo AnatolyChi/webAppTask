@@ -16,8 +16,8 @@ import java.util.Optional;
 @Log4j2
 public class UserDAOImpl implements UserDAO {
 
-    private static final String QUERY_FOR_GET = "SELECT * FROM user INNER JOIN role ON user.role_id = role.role_id WHERE login = ?";
     private static final String QUERY_FOR_ADD = "INSERT INTO user (login, password, date_registered) VALUES (?, ?, ?)";
+    private static final String QUERY_FOR_GET = "SELECT * FROM user INNER JOIN role ON user.role_id = role.role_id WHERE login = ?";
     private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ?, age = ? WHERE user_id = ?";
 
     private static final String ID_PARAM = "user_id";

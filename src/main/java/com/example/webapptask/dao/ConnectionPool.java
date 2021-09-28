@@ -34,7 +34,7 @@ public class ConnectionPool {
             CPDS.setPassword(resourceBundle.getString(PASSWORD));
 
             CPDS.setInitialPoolSize(10);
-            CPDS.setMinPoolSize(10);
+            CPDS.setMinPoolSize(5);
             CPDS.setAcquireIncrement(10);
             CPDS.setMaxPoolSize(10);
         } catch (PropertyVetoException e) {
