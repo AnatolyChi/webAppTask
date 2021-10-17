@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserDAOImpl implements UserDAO {
 
     private static final String QUERY_FOR_ADD = "INSERT INTO user (login, password, date_registered) VALUES (?, ?, ?)";
-    private static final String QUERY_FOR_GET = "SELECT * FROM user INNER JOIN role ON user.role_id = role.role_id WHERE login = ?";
+    private static final String QUERY_FOR_GET = "SELECT * FROM user INNER JOIN role USING(role_id) WHERE login = ?";
     private static final String QUERY_FOR_UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ?, age = ? WHERE user_id = ?";
 
     private static final String ID_PARAM = "user_id";
@@ -40,6 +40,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(1, info.getLogin());
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
+                    System.err.println("User exist");
                     if (Hash.password(info
                             .getPassword()
                             .toCharArray())
@@ -63,6 +64,7 @@ public class UserDAOImpl implements UserDAO {
             throw new DAOException(e);
         }
 
+        System.err.println("User not exists");
         return optionalUser;
     }
 

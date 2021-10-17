@@ -16,6 +16,7 @@ public class SessionFilter implements Filter {
     private static final String AUTHORIZATION_COMMAND = "command=GO_TO_AUTHORIZATION_PAGE";
     private static final String REGISTRATION_COMMAND = "command=GO_TO_REGISTRATION_PAGE";
     private static final String MAIN_COMMAND = "command=MAIN_PAGE";
+    private static final String CHANGE_LOCALE_COMMAND = "command=CHANGE_LOCALE";
     private static final String GO_TO_MAIN = "index.jsp";
     private static final String EMPTY = "";
 
@@ -33,9 +34,11 @@ public class SessionFilter implements Filter {
         String pathCommand = request.getQueryString();
 
         boolean loggedIn = session != null && session.getAttribute(USER_SESSION_PARAM) != null;
+//        boolean localeRequest = session != null && session.getAttribute("local") != null;
         boolean logRequest = pathCommand != null && pathCommand.equals(AUTHORIZATION_COMMAND);
         boolean regRequest = pathCommand != null && pathCommand.equals(REGISTRATION_COMMAND);
         boolean mainRequest = pathCommand != null && pathCommand.equals(MAIN_COMMAND);
+//        boolean localeRequest = pathCommand != null && pathCommand.equals(CHANGE_LOCALE_COMMAND);
         boolean emptyPath = Objects.equals(pathCommand, EMPTY) || pathCommand == null;
 
         if (loggedIn || logRequest || regRequest || mainRequest || emptyPath) {

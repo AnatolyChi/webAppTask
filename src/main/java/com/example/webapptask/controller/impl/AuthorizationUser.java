@@ -44,10 +44,12 @@ public class AuthorizationUser implements Command {
             Optional<User> userOptional = USER_SERVICE.authorization(info);
 
             if (userOptional.isPresent()) {
+                System.err.println("User already exists");
                 HttpSession session = req.getSession();
                 session.setAttribute(USER_SESSION, userOptional.get());
                 resp.sendRedirect(MAIN_PAGE);
             } else {
+                System.err.println("User not exists");
                 req.setAttribute(MESSAGE_PARAM, MESSAGE_PARAM);
                 req.getRequestDispatcher(GO_TO_AUTHORIZATION_PAGE).forward(req, resp);
             }
